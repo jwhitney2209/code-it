@@ -26,11 +26,6 @@ const userSchema = new Schema(
         ref: 'Note'
       }
     ]
-  },
-  {
-    toJSON: {
-      virtuals: true
-    }
   }
 );
 
