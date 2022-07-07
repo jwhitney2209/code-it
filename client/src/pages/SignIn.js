@@ -10,10 +10,11 @@ function SignIn() {
           alt="note w code on it"
         />
         <p className="sm:text-center sm:text-xl md:text-left md:text-3xl">
-          Code_it is a noting-taking app made specially for your code. Create a
-          note, add code snippets, personal notes and edit them at any time.
-          Create folders to set up an organized directory, or keep your notes in
-          a random piled collection. Sign up or log in to get started.
+          Code_It is a noting-taking app made especially for your code. When you
+          create a note, you can add code snippets and personal notations. You
+          can also edit, delete, and share them at any time. Create folders to
+          set up an organized directory or keep your notes in a random, piled
+          collection. Log in below or create an account to get started.
         </p>
       </div>
       <div className="flex flex-col justify-center sm:p-6">
@@ -29,9 +30,7 @@ function SignIn() {
             <label>password:</label>
             <input className="border p-2" type="password" />
           </div>
-          <button className="border w-full my-5 py-2 bg-mellow hover:bg-lime-500 text-white">
-            Sign In
-          </button>
+          <button className="border w-full my-5 py-2 bg-mellow">Sign In</button>
           <div className="flex justify-between">
             <button>Create an account</button>
           </div>
