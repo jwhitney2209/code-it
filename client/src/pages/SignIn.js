@@ -4,7 +4,11 @@ function SignIn() {
   return (
     <div className="grid grid-cols-2 sm:grid-cols-1 w-full bg-cadet md:p-12">
       <div className="md:p-6 sm:p-4 flex flex-wrap justify-center">
-        <img src={require('../assets/images/logo.png')} className="pb-2" />
+        <img
+          src={require('../assets/images/logo.png')}
+          className="pb-2"
+          alt="note w code on it"
+        />
         <p className="sm:text-center sm:text-xl md:text-left md:text-3xl">
           Code_it is a noting-taking app made specially for your code. Create a
           note, add code snippets, personal notes and edit them at any time.
