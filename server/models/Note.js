@@ -27,10 +27,17 @@ const noteSchema = new Schema(
     userId: {
       type: Schema.Types.ObjectId,
       ref: 'User'
+    },
+    categoryId: {
+      type: Schema.Types.ObjectId,
+      ref: 'Category'
+    }
+  },
+  {
+    toJSON: {
+      getters: true
     }
   }
 );
 
-const Note = model('Note', noteSchema);
-
-module.exports = Note;
+module.exports = noteSchema;
