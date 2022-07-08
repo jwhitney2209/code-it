@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-const noteSchema = require('./Note');
+const Note = require('./Note');
 
 const categorySchema = new Schema(
   {
@@ -14,7 +14,7 @@ const categorySchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'User'
     },
-    notes: [noteSchema]
+    notes: [Note.schema]
   },
   {
     toJSON: {

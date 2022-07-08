@@ -1,6 +1,6 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
-const { User, Category } = require('../models');
+const { User, Category, Note } = require('../models');
 
 const resolvers = {
   Query: {
@@ -26,6 +26,20 @@ const resolvers = {
       const params = userId ? { userId } : {};
       return Category.find(params)
         .populate('notes');
+    },
+    category: async (parent, { _id }) => {
+        return await Category.findOne({ _id })
+          .populate('notes');
+
+    },
+    note: async (parent, { _id }) => {
+      console.log({_id})
+      return await Note.findOne({ _id });
+    },
+    notes: async (parents, args, context) => {
+      if (context.user) {
+        return Note.find();
+      }
     }
   },
   Mutation: {
@@ -60,6 +74,7 @@ const resolvers = {
     },
     addCategory: async (parent, args, context) => {
       if (context.user) {
+        console.log(context.user)
         const category = await Category.create({ ...args, userId: context.user._id });
 
         await User.findByIdAndUpdate(
@@ -73,17 +88,19 @@ const resolvers = {
 
       throw new AuthenticationError('You must be logged in to save a note!')
     },
-    addNote: async (parent, { categoryId, noteTitle, noteText, noteSnippet }, context) => {
+    addNote: async (parent, { noteTitle, noteText, noteSnippet, ...args }, context) => {
       if (context.user) {
-        const updatedCategory = await Category.findByIdAndUpdate(
+        const note = await Note.create({ ...args, noteTitle, noteText, noteSnippet, userId: context.user._id });
+        const categoryId = args.categoryId
+        const userId = context.user._id
+        await Category.findByIdAndUpdate(
           { _id: categoryId },
-          { $push: { notes: { noteTitle, noteText, noteSnippet, username: context.user._id } } },
-          { new: true, runValidators: true }
+          { $push: { notes: { noteTitle, noteText, noteSnippet, categoryId, userId } } },
+          { new: true }
         )
 
-        return updatedCategory;
+        return note;
       }
-      throw new AuthenticationError('You must be logged in to save a note!')
     }
   }
 };

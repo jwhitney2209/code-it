@@ -25,6 +25,12 @@ const userSchema = new Schema(
         type: Schema.Types.ObjectId,
         ref: 'Category'
       }
+    ],
+    notes: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Note'
+      }
     ]
   },
   {

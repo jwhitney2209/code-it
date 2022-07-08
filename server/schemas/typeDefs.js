@@ -25,6 +25,9 @@ const typeDefs = gql`
     noteTitle: String
     noteText: String
     noteSnippet: String
+    categoryId: String
+    createdAt: String
+    userId: String
   }
 
   type Auth {
@@ -36,13 +39,16 @@ const typeDefs = gql`
     me: User
     users: [User]
     categories: [Category]
+    notes: [Note]
+    category(_id: ID!): Category
+    note(_id: ID!): Note
   }
 
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
     addCategory(name: String!): Category
-    addNote(categoryId: ID!, noteTitle: String!, noteText: String!, noteSnippet: String): Category
+    addNote(categoryId: ID!, noteTitle: String!, noteText: String!, noteSnippet: String): Note
   }
 `;
 
