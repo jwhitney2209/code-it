@@ -1,33 +1,35 @@
 const jwt = require('jsonwebtoken');
-require('dotenv').config();
+require('dotenv').config()
 
 const secret = process.env.AUTH_SECRET;
-const expiration = '30d';
+const expiration = '2h';
 
 module.exports = {
   authMiddleware: function({ req }) {
-    // allows token to be sent via req.body, req.query, or headers
+    //allows token to be sent via req.body, req.query, or headers
     let token = req.body.token || req.query.token || req.headers.authorization;
 
-    // ["Bearer", "<tokenvalue>"]
+    // separate "Bearer" from "<tokenvalue>"
     if (req.headers.authorization) {
       token = token
         .split(' ')
         .pop()
         .trim();
     }
-
+    // if no token, return request object as is
     if (!token) {
       return req;
     }
 
     try {
+      // decode and attach user data to request object
       const { data } = jwt.verify(token, secret, { maxAge: expiration });
       req.user = data;
     } catch {
-      console.log('Invalid token');
+      console.log('Invalid Token');
     }
 
+    // return updated request object
     return req;
   },
   signToken: function({ username, email, _id }) {

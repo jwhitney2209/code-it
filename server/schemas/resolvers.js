@@ -10,10 +10,10 @@ const resolvers = {
           .select('-__v -password')
           .populate('notes')
           .populate('categories');
-
-          return userData;
+    
+        return userData;
       }
-
+    
       throw new AuthenticationError('Not logged in');
     },
     users: async () => {
@@ -28,24 +28,48 @@ const resolvers = {
   },
   Mutation: {
     addUser: async (parent, args) => {
+      // create a user based on arguments passed in : arguments are the sign-up details
       const user = await User.create(args);
+      // assign the created user a token
+      const token = signToken(user);
     
-      return user;
+      return { token, user };
     },
     login: async (parent, { email, password }) => {
+      // find user by email
       const user = await User.findOne({ email });
     
+      // if there is no email for that user then prompt 
       if (!user) {
         throw new AuthenticationError('Incorrect Login Information');
       }
     
+      // check if password is correct
       const correctPw = await user.isCorrectPassword(password);
-    
+
+      // if the password for this user is incorrect then prompt
       if (!correctPw) {
         throw new AuthenticationError('Incorrect Login Information');
       }
     
-      return user;
+      // if login success then assign the user a token
+      const token = signToken(user);
+      return { token, user };
+    },
+    addCategory: async (parent, args, context) => {
+      if (context.user) {
+        const category = await Category.create({ ...args, username: context.user.username });
+  
+        await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $push: { categories: category._id } },
+          { new: true }
+        );
+          
+        return category;
+      }
+  
+      throw new AuthenticationError('You need to be logged in!')
     }
   }
 }
