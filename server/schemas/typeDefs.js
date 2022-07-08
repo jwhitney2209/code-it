@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server-express');
+const { gql } = require("apollo-server-express");
 
 // User has _id, username, email, password, has many notes and has many categories
 // Note has _id, title, body, snippet, belongs to user, belongs to category
@@ -10,7 +10,13 @@ const typeDefs = gql`
     username: String
     email: String
     password: String
-    category: String
+    categories: [Category]
+  }
+
+  type Category {
+    _id: ID!
+    name: String
+    userId: String
     notes: [Note]
   }
 
@@ -19,7 +25,8 @@ const typeDefs = gql`
     noteTitle: String
     noteText: String
     noteSnippet: String
-    category: String
+    categoryId: String
+    createdAt: String
     userId: String
   }
 
@@ -31,15 +38,22 @@ const typeDefs = gql`
   type Query {
     me: User
     users: [User]
-    notesByUserId(userId: String): [Note]
+    categories: [Category]
+    notes: [Note]
+    category(_id: ID!): Category
+    note(_id: ID!, categoryId: ID!): Note
   }
 
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    addCategory(category: String!): User
-    addNote(noteTitle: String!, noteText: String!, noteSnippet: String): Note
-    editNote(noteTitle: String!, noteText: String!, noteSnippet: String): Note
+    addCategory(name: String!): Category
+    addNote(
+      categoryId: ID!
+      noteTitle: String!
+      noteText: String!
+      noteSnippet: String
+    ): Note
   }
 `;
 
