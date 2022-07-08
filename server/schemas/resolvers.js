@@ -1,9 +1,10 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
-const { User, Note, Category } = require('../models');
+const { User, Note } = require('../models');
 
 const resolvers = {
   Query: {
+    // Current User (Yourself)
     me: async (parent, args, context) => {
       if (context.user) {
         const userData = await User.findOne({ _id: context.user._id })
@@ -17,14 +18,19 @@ const resolvers = {
       throw new AuthenticationError('Not logged in');
     },
     users: async () => {
-      return User.find();
+      return User.find()
+        .select('-__v -password')
+        .populate('category')
+        .populate('notes');
     },
-    notes: async () => {
-      return Note.find();
-    },
-    note: async (parent, { _id }) => {
-      return Note.findOne({ _id });
+    notesByUserId: async (parent, { userId }) => {
+      const params = userId ? { userId } : {};
+      return Note.find(params)
+        .populate('category');
     }
+  },
+  User: {
+
   },
   Mutation: {
     addUser: async (parent, args) => {
@@ -58,18 +64,39 @@ const resolvers = {
     },
     addCategory: async (parent, args, context) => {
       if (context.user) {
-        const category = await Category.create({ ...args, username: context.user.username });
-  
+        const categoryName = args; // at this point I'm just winging it
+        return await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { category: categoryName } },
+          { new: true }
+        )
+      }
+    },
+    addNote: async (parent, args, context) => {
+      if (context.user) {
+        const note = await Note.create({ ...args, userId: context.user._id });
+
         await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $push: { categories: category._id } },
+          { $push: { notes: note._id } },
           { new: true }
         );
-          
-        return category;
+
+        return note;
       }
-  
-      throw new AuthenticationError('You need to be logged in!')
+
+      throw new AuthenticationError('You must be logged in to save a note!')
+    },
+    editNote: async (parent, { _id }, context) => {
+      if (context.user) {
+        const editNote = await Note.findByIdAndUpdate({ ...args, _id });
+
+        await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $push: { notes: editNote._id }}
+        )
+      }
+
     }
   }
 }

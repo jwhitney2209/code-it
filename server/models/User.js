@@ -20,10 +20,13 @@ const userSchema = new Schema(
       required: true,
       minlength: 5
     },
-    categories: [
+    catergories: [
       {
-        type: Schema.Types.ObjectId,
-        ref: 'Category'
+        type: String,
+        required: true,
+        default: "General",
+        minlength: 1,
+        maxlength: 20
       }
     ],
     notes: [

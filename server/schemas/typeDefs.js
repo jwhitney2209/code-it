@@ -10,23 +10,17 @@ const typeDefs = gql`
     username: String
     email: String
     password: String
+    category: String
     notes: [Note]
-    categories: [Category]
   }
 
   type Note {
     _id: ID!
-    title: String
-    body: String
-    snippet: String
-    username: String
+    noteTitle: String
+    noteText: String
+    noteSnippet: String
     category: String
-  }
-
-  type Category {
-    _id: ID!
-    name: String
-    notes: [Note]
+    userId: String
   }
 
   type Auth {
@@ -35,17 +29,17 @@ const typeDefs = gql`
   }
 
   type Query {
-  me: User
-  users: [User]
-  note(_id: ID!): Note
-  notes: [Note]
-  categories: [Category]
+    me: User
+    users: [User]
+    notesByUserId(userId: String): [Note]
   }
 
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    addCategory(name: String!): Category
+    addCategory(category: String!): User
+    addNote(noteTitle: String!, noteText: String!, noteSnippet: String): Note
+    editNote(noteTitle: String!, noteText: String!, noteSnippet: String): Note
   }
 `;
 
