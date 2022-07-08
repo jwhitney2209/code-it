@@ -1,8 +1,6 @@
 import React from "react";
-import { Link } from 'react-router-dom';
-import CreateAccount from "./CreateAccount";
 
-function SignIn() {
+function CreateAccount() {
   return (
     <div className="grid grid-cols-2 sm:grid-cols-1 w-full bg-cadet md:p-12">
       <div className="md:p-6 sm:p-4 flex flex-wrap justify-center">
@@ -32,14 +30,11 @@ function SignIn() {
             <label>password:</label>
             <input className="border p-2" type="password" />
           </div>
-          <button className="border w-full my-5 py-2 bg-mellow">Sign In</button>
-          <div className="flex justify-between">
-            <Link to="/signup"> Create an account</Link>
-          </div>
+          <button className="border w-full my-5 py-2 bg-mellow">Create Account</button>
         </form>
       </div>
     </div>
   );
 }
 
-export default SignIn;
+export default CreateAccount;
