@@ -7,7 +7,7 @@ const Header = () => {
       <header className="sm:text-3xl md:text-4xl font-bold">
         <Link to="/">
           <h1 className="my-auto">
-            <a href="/">&#60;code_it/&#62;</a>
+            &#60;code_it/&#62;
           </h1>
         </Link>
       </header>
