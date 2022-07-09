@@ -17,7 +17,6 @@ const noteSchema = new Schema(
     },
     noteSnippet: {
       type: String,
-      
     },
     createdAt: {
       type: Date,

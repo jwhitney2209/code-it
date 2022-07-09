@@ -39,9 +39,9 @@ const typeDefs = gql`
     me: User
     users: [User]
     categories: [Category]
-    notes: [Note]
+    notes(userId: ID!): [Note]
     category(_id: ID!): Category
-    note(_id: ID!, categoryId: ID!): Note
+    note(_id: ID!): Note
   }
 
   type Mutation {
@@ -54,11 +54,9 @@ const typeDefs = gql`
       noteText: String!
       noteSnippet: String
     ): Note
+    removeNote(_id: ID!, categoryId: ID!): Note
   }
 `;
 
 module.exports = typeDefs;
 
-// addCategory(name: String!, userId: String!): User
-// addNote(title: String!, text: String!, snippet: String): Note
-// editNote(title: String!, text: String!, snippet: String): Note

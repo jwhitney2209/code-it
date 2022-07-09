@@ -86,11 +86,7 @@ const resolvers = {
 
       throw new AuthenticationError("You must be logged in to save a note!");
     },
-    addNote: async (
-      parent,
-      { noteTitle, noteText, noteSnippet, ...args },
-      context
-    ) => {
+    addNote: async (parent,{ noteTitle, noteText, noteSnippet, ...args },context) => {
       if (context.user) {
         const note = await Note.create({
           ...args,
@@ -100,19 +96,24 @@ const resolvers = {
           userId: context.user._id,
         });
         const categoryId = args.categoryId;
-        const userId = context.user._id;
         await Category.findByIdAndUpdate(
           { _id: categoryId },
-          {
-            $push: {
-              notes: { noteTitle, noteText, noteSnippet, categoryId, userId },
-            },
-          },
+          {$push: {notes: note}},
           { new: true }
         );
 
         return note;
       }
+    },
+    removeNote: async (parent, { _id, categoryId }, context) => {
+      const categoryModel = await Category.findByIdAndUpdate(
+        { _id: categoryId },
+        { $pull: { notes: { _id: _id } } },
+        { new: true }
+      )
+      await Note.findByIdAndDelete({_id: _id})
+
+      return categoryModel;
     },
   },
 };
