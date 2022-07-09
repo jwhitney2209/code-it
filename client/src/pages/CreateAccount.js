@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../utils/mutations";
 
-import Auth from '../utils/auth';
+import Auth from "../utils/auth";
 
 const CreateAccount = () => {
   const [formState, setFormState] = useState({
@@ -60,15 +60,26 @@ const CreateAccount = () => {
           </h2>
           <div className="flex flex-col py-2">
             <label>username</label>
-            <input onChange={handleChange} className="border p-2" type="text" />
+            <input
+              value={formState.username}
+              onChange={handleChange}
+              className="border p-2"
+              type="text"
+            />
           </div>
           <div className="flex flex-col py-2">
             <label>email:</label>
-            <input onChange={handleChange} className="border p-2" type="text" />
+            <input
+              value={formState.email}
+              onChange={handleChange}
+              className="border p-2"
+              type="text"
+            />
           </div>
           <div className="flex flex-col py-2">
             <label>password:</label>
             <input
+              value={formState.password}
               onChange={handleChange}
               className="border p-2"
               type="password"
@@ -78,6 +89,7 @@ const CreateAccount = () => {
             Create Account
           </button>
         </form>
+        {error && <div>Signup failed</div>}
       </div>
     </div>
   );
