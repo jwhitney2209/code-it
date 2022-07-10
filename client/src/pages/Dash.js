@@ -13,7 +13,7 @@ function Dash() {
   const categories = data?.categories || [];
   // this should be the correct way to add the categoryId and category name to the html element
   // {categories._id} | {categories.name} 
-  // example: <div id={categories._id}></div> -- I'm praying this works :)
+  // example: <div id={categories._id}>{categories.name}</div> -- I'm praying this works :)
 
   // try these to generate note data
   // {categories.notes.noteTitle} || {categories.notes.noteText} || {categories.notes.noteSnippet} || {categories.notes.createdAt}..etc...
