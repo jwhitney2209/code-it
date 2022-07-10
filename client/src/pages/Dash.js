@@ -6,10 +6,15 @@ function Dash() {
   const loggedIn = Auth.loggedIn();
 
   return (
-    <div>
+    <main>
       <div>
+      {loggedIn && (
+        <div className="col-12 mb-3">
+          
+        </div>
+      )}
       </div>
-    </div>
+    </main>
   );
 }
 
