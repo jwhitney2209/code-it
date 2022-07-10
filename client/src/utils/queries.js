@@ -1,19 +1,11 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_CATEGORIES = gql`
-query categories($userId: ID!) {
-  categories(userId: $userId) {
+query categories($username: String) {
+  categories(username: $username) {
     _id
-    name
-    userId
-    notes {
-      _id
-      noteTitle
-      noteText
-      noteSnippet
-      categoryId
-      createdAt
-    }
+    categoryName
+    username
   }
 }`;
 
@@ -21,8 +13,8 @@ export const QUERY_CATEGORY = gql`
 query category($id: ID!) {
   category(_id: $id) {
     _id
-    name
-    userId
+    categoryName
+    username
     notes {
       _id
       noteTitle
@@ -30,20 +22,22 @@ query category($id: ID!) {
       noteSnippet
       categoryId
       createdAt
+      username
     }
   }
 }
 `;
 
 export const QUERY_NOTES = gql`
-query notes($userId: ID!) {
-  notes(userId: $userId) {
+query notes($username: String) {
+  notes(username: $username) {
     _id
     noteTitle
     noteText
     noteSnippet
     categoryId
     createdAt
+    username
   }
 }`;
 
@@ -61,15 +55,15 @@ query note($id: ID!) {
 
 
 export const QUERY_ME = gql`
-{
+query me {
   me {
     _id
     username
     email
     categories {
       _id
-      name
-      userId
+      categoryName
+      username
       notes {
         _id
         noteTitle
@@ -77,7 +71,7 @@ export const QUERY_ME = gql`
         noteSnippet
         categoryId
         createdAt
-        userId
+        username
       }
     }
   }

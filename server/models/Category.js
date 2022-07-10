@@ -3,16 +3,15 @@ const Note = require('./Note');
 
 const categorySchema = new Schema(
   {
-    name: {
+    categoryName: {
       type: String,
       required: true,
-      unique: true,
       minlength: 1,
       maxlength: 20
     },
-    userId: {
-      type: Schema.Types.ObjectId,
-      ref: 'User'
+    username: {
+      type: String,
+      required: true
     },
     notes: [Note.schema]
   },

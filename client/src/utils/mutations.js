@@ -18,16 +18,18 @@ export const ADD_USER = gql`
       token
       user {
         _id
+        username
       }
     }
   }
 `;
 
 export const CREATE_CATEGORY = gql`
-mutation addCategory($name: String!) {
-  addCategory(name: $name) {
+mutation addCategory($categoryName: String!) {
+  addCategory(categoryName: $categoryName) {
     _id
-    name
+    categoryName
+    username
   }
 }`;
 
@@ -40,7 +42,7 @@ mutation addNote($categoryId: ID!, $noteTitle: String!, $noteText: String!, $not
     noteSnippet
     categoryId
     createdAt
-    userId
+    username
   }
 }`;
 
