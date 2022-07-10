@@ -1,7 +1,9 @@
 import React from "react";
 import Auth from "../utils/auth";
+
 import CategoryForm from "../components/CategoryForm/index";
 import NoteForm from "../components/NoteForm/index";
+
 import { useQuery } from "@apollo/client";
 import { QUERY_CATEGORIES, QUERY_ME, QUERY_NOTES } from "../utils/queries";
 
@@ -26,6 +28,7 @@ function Dash() {
   const loggedIn = Auth.loggedIn();
 
   return (
+
     <main>
       <div className="flex ">
         {loggedIn && (
@@ -47,6 +50,7 @@ function Dash() {
             />
           </div>
         ) : null}
+
       </div>
     </main>
   );
