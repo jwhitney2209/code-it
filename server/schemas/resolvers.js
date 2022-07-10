@@ -19,9 +19,14 @@ const resolvers = {
     users: async () => {
       return User.find().select("-__v -password").populate("categories");
     },
+    user: async (parent, { username }) => {
+      return User.findOne({ username })
+        .select('-__v -password')
+        .populate('categories');
+    },
     // find categories by userId
-    categories: async (parent, { userId }) => {
-      const params = userId ? { userId } : {};
+    categories: async (parent, { username }) => {
+      const params = username ? { username } : {};
       return Category.find(params).populate("notes");
     },
     category: async (parent, { _id }) => {
@@ -72,12 +77,12 @@ const resolvers = {
         console.log(context.user);
         const category = await Category.create({
           ...args,
-          userId: context.user._id,
+          username: context.user.username,
         });
 
         await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $push: { categories: category._id } },
+          { $push: { categories: category } },
           { new: true }
         );
 
@@ -93,7 +98,7 @@ const resolvers = {
           noteTitle,
           noteText,
           noteSnippet,
-          userId: context.user._id,
+          username: context.user.username,
         });
         const categoryId = args.categoryId;
         await Category.findByIdAndUpdate(
