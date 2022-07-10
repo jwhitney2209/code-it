@@ -71,9 +71,9 @@ function SignIn() {
               onChange={handleChange} 
               value={formState.password}className="border p-2" type="password" />
           </div>
-          <button type="submit" className="border w-full my-5 py-2 bg-mellow">Sign In</button>
-          <div className="flex justify-between">
-            <Link to="/signup"> Create an account</Link>
+          <Link to="/dashboard" type="submit" className="border w-full my-5 p-2 text-center bg-mellow hover:bg-lime">Sign In</Link>
+          <div className="flex">
+            Don't have an account?<Link to="/signup" className=" px-2 hover:text-cadet">Create one here!</Link>
           </div>
         </form>
         {error && <div>Login failed</div>}
