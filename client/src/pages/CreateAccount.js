@@ -59,8 +59,8 @@ const CreateAccount = () => {
             Welcome to Code_It
           </h2>
           <div className="flex flex-col py-2">
-            <label>username</label>
-            <input
+            <label htmlFor="username">username</label>
+            <input name="username"
               value={formState.username}
               onChange={handleChange}
               className="border p-2"
@@ -68,17 +68,17 @@ const CreateAccount = () => {
             />
           </div>
           <div className="flex flex-col py-2">
-            <label>email:</label>
-            <input
+            <label htmlFor="email">email:</label>
+            <input name="email"
               value={formState.email}
               onChange={handleChange}
               className="border p-2"
-              type="text"
+              type="email"
             />
           </div>
           <div className="flex flex-col py-2">
-            <label>password:</label>
-            <input
+            <label htmlFor="password">password:</label>
+            <input name="password"
               value={formState.password}
               onChange={handleChange}
               className="border p-2"

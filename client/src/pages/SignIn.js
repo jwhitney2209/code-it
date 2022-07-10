@@ -11,7 +11,6 @@ function SignIn() {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-
     setFormState({
       ...formState,
       [name]: value,
@@ -60,15 +59,15 @@ function SignIn() {
             Welcome to Code_It
           </h2>
           <div className="flex flex-col py-2">
-            <label>email:</label>
-            <input 
+            <label htmlFor="email">email:</label>
+            <input name="email" 
               onChange={handleChange} 
               value={formState.email}
               className="border p-2" type="text" />
           </div>
           <div className="flex flex-col py-2">
-            <label>password:</label>
-            <input 
+            <label htmlFor="password">password:</label>
+            <input name="password"
               onChange={handleChange} 
               value={formState.password}className="border p-2" type="password" />
           </div>
