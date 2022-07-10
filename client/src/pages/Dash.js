@@ -1,9 +1,9 @@
-import React from 'react';
-import Auth from '../utils/auth';
-import CategoryForm from '../components/CategoryForm/index';
-import NoteForm from '../components/NoteForm/index';
-import { useQuery } from '@apollo/client';
-import { QUERY_CATEGORIES, QUERY_ME, QUERY_NOTES } from '../utils/queries';
+import React from "react";
+import Auth from "../utils/auth";
+import CategoryForm from "../components/CategoryForm/index";
+import NoteForm from "../components/NoteForm/index";
+import { useQuery } from "@apollo/client";
+import { QUERY_CATEGORIES, QUERY_ME, QUERY_NOTES } from "../utils/queries";
 
 function Dash() {
   // queries the user's data - this includes ALL categories and ALL notes by the user
@@ -14,25 +14,39 @@ function Dash() {
   // all category data
   const categories = data?.categories || [];
   // this should be the correct way to add the categoryId and category name to the html element
-  // {categories._id} | {categories.name} 
+  // {categories._id} | {categories.name}
   // example: <div id={categories._id}>{categories.name}</div> -- I'm praying this works :)
 
   // try these to generate note data
   // {categories.notes.noteTitle} || {categories.notes.noteText} || {categories.notes.noteSnippet} || {categories.notes.createdAt}..etc...
   // we could also try the code below this to make the prop drilling less
-  const noteData = categories.notes; // that way you only have to type 
+  const noteData = categories.notes; // that way you only have to type
   // {noteData.noteTitle} || {noteData.noteText} || {noteData.noteSnippet} || {noteData.createdAt} etc...
 
   const loggedIn = Auth.loggedIn();
 
   return (
     <main>
-      <div>
-      {loggedIn && (
-        <div className="col-12 mb-3">
-          
+      <div className="flex ">
+        {loggedIn && (
+          <div className="flex-1 block">
+            <CategoryForm />
+          </div>
+        )}
+        <div className={`flex-1 block ${loggedIn}`}>
+          {loading ? (
+            <div>Loading...</div>
+          ) : (
+            <CategoryList categories={categories} title="Select a Category" />
+          )}
         </div>
-      )}
+        {loggedIn && userData ? (
+          <div className="flex-4">
+            <NoteForm
+              username={userData.me.username}
+            />
+          </div>
+        ) : null}
       </div>
     </main>
   );
