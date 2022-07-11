@@ -20,13 +20,10 @@ function Dash() {
   const loggedIn = Auth.loggedIn();
 
   return (
-    <div className="flex flex-col justify-between h-screen w-full text-antique bg-mellow">
-      {loggedIn && <VscNewFolder />}
+    <div className="grid grid-cols-4 justify-between h-screen w-full text-antique bg-mellow">
+      {loggedIn && <SideBar />}
       <SideBar />
-      <div>
-        {loggedIn && userData ? <CategoryList categories={categories} /> : null}
-        <CategoryList categories={categories} />
-      </div>
+      <div>Notes Here</div>
     </div>
   );
 }
