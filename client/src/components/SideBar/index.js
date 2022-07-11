@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { QUERY_CATEGORIES, QUERY_ME, QUERY_NOTES } from '../../utils/queries';
 import CategoryList from '../CategoryList';
 //import icons
-import { VscNewFolder, VscNotebook, VscListTree } from 'react-icons/vsc';
+import { VscNewFolder, VscNotebook, VscListTree, VscSearch } from 'react-icons/vsc';
 import { GiPowerButton } from 'react-icons/gi';
 
 function SideBar() {
@@ -14,9 +14,23 @@ function SideBar() {
     Auth.logout();
   }
 
+  // search bar usestate
+  const [ searchText, setSearchText] = useState('');
+
   return (
     <div className="h-screen w-full text-antique bg-mellow">
       <div className="flex flex-col h-screen md:w-28 sm:w-20 sm:items-center bg-cadet">
+        <div className="flex flex-row p-1 md:mx-2 md:mt-3 sm:mx-1 sm:mt-4 align-items: center justify-items-start bg-lime rounded-2xl p-5">
+            <VscSearch
+              size={10}
+            />
+            <input 
+              className="border-none bg-lime focus:outline-none"
+              type="text" 
+              placeholder="type to search a note..." 
+              onChange={setSearchText}
+              />
+        </div>
         <div>
           <Link to="/createcategory" type="button" className="group">
             <VscNewFolder

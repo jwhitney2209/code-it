@@ -13,6 +13,7 @@ const NoteForm = ({ categoryId }) => {
     setNoteTitle(event.target.value);
   };
 
+
   const handleNoteTextChange = event => {
     setNoteText(event.target.value);
   };
