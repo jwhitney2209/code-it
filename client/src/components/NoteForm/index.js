@@ -50,7 +50,6 @@ const NoteForm = ({ categoryId }) => {
             type="text"
             placeholder="Note Title"
             className="border p-2 rounded"
-            type="text"
           />
         </div>
 
