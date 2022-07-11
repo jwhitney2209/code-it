@@ -71,7 +71,7 @@ function SignIn() {
               onChange={handleChange} 
               value={formState.password}className="border p-2" type="password" />
           </div>
-          <Link to="/dashboard" type="submit" className="border w-full my-5 p-2 text-center bg-mellow hover:bg-lime">Sign In</Link>
+          <button type="submit" className="border w-full my-5 p-2 text-center bg-mellow hover:bg-lime">Sign In</button>
           <div className="flex">
             Don't have an account?<Link to="/signup" className=" px-2 hover:text-cadet">Create one here!</Link>
           </div>
