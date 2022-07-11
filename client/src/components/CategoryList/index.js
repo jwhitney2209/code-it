@@ -1,15 +1,17 @@
 import React from "react";
 
-const CategoryList = ({ categories, categoryName, _id }) => {
-  if (!categories.length) {
+const CategoryList = (props) => {
+  const propsData = props.categories;
+
+  if (!propsData.length) {
     return <h3>No Categories Yet!</h3>
   }
 
   return (
     <div>
-      {categories && categories.map(category => (
-        <div key={category._id} id={category._id}>
-          {category.categoryName}
+      {propsData && propsData.map(categories => (
+        <div key={categories._id} id={categories._id}>
+          {categories.categoryName}
         </div>
       ))}
     </div>
