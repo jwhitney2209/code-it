@@ -18,13 +18,6 @@ const CreateCategory = () => {
       } catch (e) {
         console.log('First Category insertion by user');
       }
-
-      const { categories } = cache.readQuery({ query: QUERY_CATEGORIES });
-
-      cache.writeQuery({
-        query: QUERY_CATEGORIES,
-        data: { categories: [addCategory, ...categories] },
-      });
     },
   });
 
@@ -39,7 +32,7 @@ const CreateCategory = () => {
       await addCategory({
         variables: { categoryName },
       });
-
+      console.log(categoryName)
       setCategoryName('');
       navigate('/dashboard');
     } catch (e) {
