@@ -16,11 +16,8 @@ function SideBar() {
 
   const noteData = categories.notes;
 
-  const loggedIn = Auth.loggedIn();
-
   return (
     <div className="h-screen w-full text-antique bg-mellow">
-      {loggedIn && <VscNewFolder />}
       <div className="flex flex-col h-screen md:w-28 sm:w-20 sm:items-center bg-cadet">
         <div>
           <Link to="/createcategory" type="button" className="group">
