@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 
 import Auth from '../utils/auth';
 
 function SignIn() {
+  const navigate = useNavigate();
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error }] = useMutation(LOGIN_USER);
 
@@ -26,6 +27,7 @@ function SignIn() {
       });
 
       Auth.login(data.login.token);
+      navigate('/dashboard');
     } catch (e) {
       console.error(e);
     }
@@ -71,7 +73,7 @@ function SignIn() {
               onChange={handleChange} 
               value={formState.password}className="border p-2" type="password" />
           </div>
-          <Link to="/dashboard" type="submit" className="border w-full my-5 p-2 text-center bg-mellow hover:bg-lime">Sign In</Link>
+          <button type="submit" className="border w-full my-5 p-2 text-center bg-mellow hover:bg-lime">Sign In</button>
           <div className="flex">
             Don't have an account?<Link to="/signup" className=" px-2 hover:text-cadet">Create one here!</Link>
           </div>

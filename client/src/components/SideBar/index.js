@@ -9,12 +9,10 @@ import { VscNewFolder, VscNotebook, VscListTree } from 'react-icons/vsc';
 import { GiPowerButton } from 'react-icons/gi';
 
 function SideBar() {
-  const { data } = useQuery(QUERY_CATEGORIES);
-  const { data: userData } = useQuery(QUERY_ME);
-
-  const categories = data?.categories || [];
-
-  const noteData = categories.notes;
+  const logout = event => {
+    event.preventDefault();
+    Auth.logout();
+  }
 
   return (
     <div className="h-screen w-full text-antique bg-mellow">
@@ -56,7 +54,7 @@ function SideBar() {
         </div>
 
         <div>
-          <button type="submit" className="group">
+          <button type="submit" className="group" href="/" onClick={logout}>
             <GiPowerButton
               size={64}
               className=" hover:bg-lime hover:text-liver hover:rounded-xl bg-mellow rounded-full p-1 md:mx-2 md:mt-6 sm:mx-1 sm:mt-4"
