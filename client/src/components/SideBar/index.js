@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import Auth from '../../utils/auth';
+import CategoryList from '../CategoryList/index';
+import NoteList from '../NoteList/index';
 import { useQuery } from '@apollo/client';
 import { Link } from 'react-router-dom';
 import { QUERY_CATEGORIES, QUERY_ME, QUERY_NOTES } from '../../utils/queries';
-import CategoryList from '../CategoryList';
 //import icons
 import { VscNewFolder, VscNotebook, VscListTree, VscSearch } from 'react-icons/vsc';
 import { GiPowerButton } from 'react-icons/gi';
@@ -20,7 +21,7 @@ function SideBar() {
   return (
     <div className="h-screen w-full text-antique bg-mellow">
       <div className="flex flex-col h-screen md:w-28 sm:w-20 sm:items-center bg-cadet">
-        <div className="flex flex-row p-1 md:mx-2 md:mt-3 sm:mx-1 sm:mt-4 align-items: center justify-items-start bg-lime rounded-2xl p-5">
+        <div className="flex flex-row p-1 md:mx-2 md:mt-3 sm:mx-1 sm:mt-4 align-items: center justify-items-start bg-lime rounded-2xl">
             <VscSearch
               size={10}
             />

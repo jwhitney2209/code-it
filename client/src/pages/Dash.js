@@ -8,7 +8,7 @@ import SideBar from "../components/SideBar";
 import NoteList from "../components/NoteList"
 //import icons
 
-function Dash() {
+function Dash( ) {
   const { loading, data } = useQuery(QUERY_ME);
 
   const categories = data?.me.categories || [];
@@ -25,7 +25,7 @@ function Dash() {
       {loggedIn && (
         <div className="grid grid-cols-4 justify-between h-screen w-full text-antique bg-mellow">
           <SideBar />
-          <NoteList notes={notes}/>
+          <NoteList notes={notes.filter((note)=> note.text.toLowerCase().includes())}/>
           <CategoryList categories={categories} />
         </div>
       )}
