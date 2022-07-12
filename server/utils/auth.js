@@ -1,20 +1,17 @@
 const jwt = require('jsonwebtoken');
-require('dotenv').config()
+require('dotenv').config();
 
-const secret = process.env.AUTH_SECRET;
+const secret = 'hehe';
 const expiration = '3h';
 
 module.exports = {
-  authMiddleware: function({ req }) {
+  authMiddleware: function ({ req }) {
     //allows token to be sent via req.body, req.query, or headers
     let token = req.body.token || req.query.token || req.headers.authorization;
 
     // separate "Bearer" from "<tokenvalue>"
     if (req.headers.authorization) {
-      token = token
-        .split(' ')
-        .pop()
-        .trim();
+      token = token.split(' ').pop().trim();
     }
     // if no token, return request object as is
     if (!token) {
@@ -32,9 +29,9 @@ module.exports = {
     // return updated request object
     return req;
   },
-  signToken: function({ username, email, _id }) {
+  signToken: function ({ username, email, _id }) {
     const payload = { username, email, _id };
 
     return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
-  }
+  },
 };
