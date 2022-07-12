@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { QUERY_ME } from "../utils/queries";
 import CategoryList from "../components/CategoryList";
 import SideBar from "../components/SideBar";
+import NoteList from "../components/NoteList"
 //import icons
 
 function Dash() {
@@ -15,7 +16,7 @@ function Dash() {
   // const notesData = categories.notes
   // notesData.noteTitle etc...
 
-  const noteData = categories.notes;
+  const notes = data?.me.categories.notes || [];
 
   const loggedIn = Auth.loggedIn();
 
@@ -24,7 +25,7 @@ function Dash() {
       {loggedIn && (
         <div className="grid grid-cols-4 justify-between h-screen w-full text-antique bg-mellow">
           <SideBar />
-          <div>Notes Here</div>
+          <NoteList notes={notes}/>
           <CategoryList categories={categories} />
         </div>
       )}
