@@ -23,14 +23,16 @@ const noteSchema = new Schema(
       default: Date.now,
       get: timestamp => dateFormat(timestamp)
     },
-    username: {
+    tag: {
       type: String,
-      required: true
+      required: true,
+      minlength: 1,
+      maxlength: 20
     },
-    categoryId: {
+    userId: {
       type: Schema.Types.ObjectId,
-      ref: 'Category'
-    }
+      ref: 'User'
+    },
   },
   {
     toJSON: {

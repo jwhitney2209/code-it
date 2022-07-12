@@ -9,7 +9,8 @@ const resolvers = {
       if (context.user) {
         const userData = await User.findOne({ _id: context.user._id })
           .select("-__v -password")
-          .populate("categories");
+          .populate("categories")
+          .populate("notes");
 
         return userData;
       }
@@ -34,7 +35,7 @@ const resolvers = {
     },
     note: async (parent, { _id }) => {
       console.log({ _id });
-      return await Note.findOne({ _id });
+      return Note.findOne({ _id });
     },
     notes: async (parents, args, context) => {
       if (context.user) {
@@ -91,32 +92,31 @@ const resolvers = {
 
       throw new AuthenticationError("You must be logged in to save a note!");
     },
-    addNote: async (parent,{ noteTitle, noteText, noteSnippet, ...args },context) => {
+    addNote: async (parent,{ noteTitle, noteText, noteSnippet, tag },context) => {
       if (context.user) {
         const note = await Note.create({
-          ...args,
+          tag,
           noteTitle,
           noteText,
           noteSnippet,
-          username: context.user.username,
+          userId: context.user._id,
         });
-        const categoryId = args.categoryId;
-        await Category.findByIdAndUpdate(
-          { _id: categoryId },
-          {$push: {notes: note}},
+        await User.findByIdAndUpdate(
+          { _id: context.user._id},
+          { $push: {notes: note}},
           { new: true }
-        );
+        )
 
         return note;
       }
     },
-    removeNote: async (parent, { _id, categoryId }, context) => {
-      const categoryModel = await Category.findByIdAndUpdate(
-        { _id: categoryId },
-        { $pull: { notes: { _id: _id } } },
+    removeNote: async (parent, { _id }, context) => {
+      const categoryModel = await User.findByIdAndUpdate(
+        { _id: context.user._id },
+        { $pull: { notes: { _id } } },
         { new: true }
       )
-      await Note.findByIdAndDelete({_id: _id})
+      await Note.findByIdAndDelete({ _id })
 
       return categoryModel;
     },

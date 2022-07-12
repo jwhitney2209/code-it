@@ -11,6 +11,7 @@ const typeDefs = gql`
     email: String
     password: String
     categories: [Category]
+    notes: [Note]
   }
 
   type Category {
@@ -25,9 +26,9 @@ const typeDefs = gql`
     noteTitle: String
     noteText: String
     noteSnippet: String
-    categoryId: String
+    tag: String
     createdAt: String
-    username: String
+    userId: String
   }
 
   type Auth {
@@ -50,12 +51,12 @@ const typeDefs = gql`
     addUser(username: String!, email: String!, password: String!): Auth
     addCategory(categoryName: String!): Category
     addNote(
-      categoryId: ID!
+      tag: String!
       noteTitle: String!
       noteText: String!
       noteSnippet: String
     ): Note
-    removeNote(_id: ID!, categoryId: ID!): Note
+    removeNote(_id: ID!): Note
   }
 `;
 

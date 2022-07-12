@@ -12,7 +12,7 @@ import SignIn from './pages/SignIn';
 import CreateAccount from './pages/CreateAccount';
 import Dash from './pages/Dash';
 import Footer from './components/Footer';
-import CreateCategory from './pages/CreateCategory';
+import CreateNote from './pages/CreateNote';
 import SingleNote from './pages/SingleNote';
 import NoteForm from './components/NoteForm';
 
@@ -46,9 +46,8 @@ function App() {
             <Route path="/" element={<SignIn />} />
             <Route path="/signup" element={<CreateAccount />} />
             <Route path="/dashboard" element={<Dash />} />
-            <Route path="/createcategory" element={<CreateCategory />} />
-            <Route path="/createnote" element={<NoteForm />} />
-            <Route path="/singlenote" element={<SingleNote />} />
+            <Route path="/createnote" element={<CreateNote />} />
+            <Route path="/singlenote/:id" element={<SingleNote />} />
           </Routes>
 
           <Footer />
