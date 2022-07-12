@@ -34,21 +34,21 @@ mutation addCategory($categoryName: String!) {
 }`;
 
 export const CREATE_NOTE = gql`
-mutation addNote($categoryId: ID!, $noteTitle: String!, $noteText: String!, $noteSnippet: String) {
-  addNote(categoryId: $categoryId, noteTitle: $noteTitle, noteText: $noteText, noteSnippet: $noteSnippet) {
+mutation addNote($tag: String!, $noteTitle: String!, $noteText: String!, $noteSnippet: String) {
+  addNote(tag: $tag, noteTitle: $noteTitle, noteText: $noteText, noteSnippet: $noteSnippet) {
     _id
     noteTitle
     noteText
     noteSnippet
-    categoryId
+    tag
     createdAt
-    username
+    userId
   }
 }`;
 
 export const REMOVE_NOTE = gql`
-mutation removeNote($id: ID!, $categoryId: ID!) {
-  removeNote(_id: $id, categoryId: $categoryId) {
+mutation removeNote($id: ID!) {
+  removeNote(_id: $id) {
     noteTitle
   }
 }`;
