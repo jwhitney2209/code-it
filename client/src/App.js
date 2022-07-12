@@ -13,6 +13,7 @@ import CreateAccount from './pages/CreateAccount';
 import Dash from './pages/Dash';
 import Footer from './components/Footer';
 import CreateCategory from './pages/CreateCategory';
+import SingleNote from './pages/SingleNote';
 import NoteForm from './components/NoteForm';
 
 const httpLink = createHttpLink({
@@ -47,6 +48,7 @@ function App() {
             <Route path="/dashboard" element={<Dash />} />
             <Route path="/createcategory" element={<CreateCategory />} />
             <Route path="/createnote" element={<NoteForm />} />
+            <Route path="/singlenote" element={<SingleNote />} />
           </Routes>
 
           <Footer />
