@@ -8,7 +8,7 @@ import SideBar from "../components/SideBar";
 import NoteList from "../components/NoteList"
 //import icons
 
-function Dash() {
+function Dash( ) {
   const { loading, data } = useQuery(QUERY_ME);
 
   const categories = data?.me.categories || [];
