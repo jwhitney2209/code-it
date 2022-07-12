@@ -16,7 +16,7 @@ function Dash() {
   // const notesData = categories.notes
   // notesData.noteTitle etc...
 
-  const noteData = categories.notes;
+  const notes = data?.me.categories.notes || [];
 
   const loggedIn = Auth.loggedIn();
 
@@ -25,7 +25,7 @@ function Dash() {
       {loggedIn && (
         <div className="grid grid-cols-4 justify-between h-screen w-full text-antique bg-mellow">
           <SideBar />
-          <div> No Notes Yet! </div>
+          <NoteList notes={notes}/>
           <CategoryList categories={categories} />
         </div>
       )}

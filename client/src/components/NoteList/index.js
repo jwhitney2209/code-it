@@ -1,15 +1,13 @@
 import React from "react";
 
 const NoteList = (props) => {
-  const propsData = props.categories.notes;
-
-  if (!propsData.length) {
+  if (!props.length) {
     return <h3>No notes Yet!</h3>
   }
 
   return (
     <div>
-      {propsData && propsData.map(notes => (
+      {props && props.map(notes => (
         <div key={notes._id} id={notes._id}>
           {notes.notesTitle}
         </div>
