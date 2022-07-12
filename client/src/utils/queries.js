@@ -48,8 +48,9 @@ query note($id: ID!) {
     noteTitle
     noteText
     noteSnippet
-    categoryId
+    tag
     createdAt
+    userId
   }
 }`;
 
@@ -60,19 +61,13 @@ query me {
     _id
     username
     email
-    categories {
+    notes {
       _id
-      categoryName
-      username
-      notes {
-        _id
-        noteTitle
-        noteText
-        noteSnippet
-        categoryId
-        createdAt
-        username
-      }
+      noteTitle
+      noteText
+      noteSnippet
+      tag
+      createdAt
     }
   }
 }
