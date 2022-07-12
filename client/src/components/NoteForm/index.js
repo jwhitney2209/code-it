@@ -13,6 +13,7 @@ const NoteForm = ({ categoryId }) => {
     setNoteTitle(event.target.value);
   };
 
+
   const handleNoteTextChange = event => {
     setNoteText(event.target.value);
   };
@@ -50,7 +51,6 @@ const NoteForm = ({ categoryId }) => {
             type="text"
             placeholder="Note Title"
             className="border p-2 rounded"
-            type="text"
           />
         </div>
 

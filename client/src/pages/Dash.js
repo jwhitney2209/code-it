@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { QUERY_ME } from "../utils/queries";
 import CategoryList from "../components/CategoryList";
 import SideBar from "../components/SideBar";
+import NoteList from "../components/NoteList"
 //import icons
 
 function Dash() {
@@ -15,7 +16,7 @@ function Dash() {
   // const notesData = categories.notes
   // notesData.noteTitle etc...
 
-  const noteData = categories.notes;
+  const notes = data?.me.categories.notes || [];
 
   const loggedIn = Auth.loggedIn();
 
