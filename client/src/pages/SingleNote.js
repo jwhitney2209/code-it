@@ -1,19 +1,20 @@
-import React from "react";
-import { Link, useParams } from "react-router-dom";
+import React from 'react';
+import { Link, useParams } from 'react-router-dom';
 
-import { useQuery } from "@apollo/client";
-import { QUERY_NOTE } from "../utils/queries";
+import { useQuery } from '@apollo/client';
+import { QUERY_NOTE } from '../utils/queries';
 
-const SingleNote = (props) => {
-  console.log(props)
+import SideBar from '../components/SideBar';
+
+const SingleNote = props => {
+  console.log(props);
   const { id: noteId } = useParams();
 
   const { loading, data } = useQuery(QUERY_NOTE, {
     variables: { id: noteId },
   });
-  console.log(data)
+  console.log(data);
   const note = data?.note || {};
-
 
   if (loading) {
     return (
@@ -29,16 +30,25 @@ const SingleNote = (props) => {
   }
 
   return (
-    <div className="flex flex-col justify-center sm:p-6">
-      <div className="max-w-[400px] w-full mx-auto bg-antique p-4">
-        <h1>{note.noteTitle}</h1>
-        <h1>{note.noteText}</h1>
-        <h1>{note.noteSnippet}</h1>
-        <h1>{note.tag}</h1>
-        <h1>{note.createdAt}</h1>
-        <Link to="/dashboard" className="border w-full inline-block px-6 my-2 py-2.5 bg-mellow hover:bg-lime text-liver font-medium text-xs leading-tight uppercase transition duration-150 ease-in-out">Back To Notes</Link>
+    <>
+      <div className="flex flex-col justify-center h-screen w-full text-liver bg-mellow">
+        <div className="sm:p-6">
+          <div className="max-w-[400px] w-full mx-auto bg-antique p-4">
+            <h1>{note.noteTitle}</h1>
+            <h1>{note.noteText}</h1>
+            <h1>{note.noteSnippet}</h1>
+            <h1>{note.tag}</h1>
+            <h1>{note.createdAt}</h1>
+            <Link
+              to="/dashboard"
+              className="border w-[6.5rem] inline-block px-6 my-2 py-2.5 bg-mellow hover:bg-lime text-liver font-medium text-xs leading-tight uppercase transition duration-150 ease-in-out"
+            >
+              Go Back
+            </Link>
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useMutation } from "@apollo/client";
-import { CREATE_NOTE } from "../utils/mutations";
-import { QUERY_ME } from "../utils/queries";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
+import { CREATE_NOTE } from '../utils/mutations';
+import { QUERY_ME } from '../utils/queries';
 import Auth from '../utils/auth';
 
 const CreateCategory = () => {
   const navigate = useNavigate();
-  const [noteTitle, setnoteTitle] = useState("");
-  const [noteText, setnoteText] = useState("");
-  const [noteSnippet, setnoteSnippet] = useState("");
-  const [tag, setTag] = useState("");
+  const [noteTitle, setnoteTitle] = useState('');
+  const [noteText, setnoteText] = useState('');
+  const [noteSnippet, setnoteSnippet] = useState('');
+  const [tag, setTag] = useState('');
   const [addNote, { error }] = useMutation(CREATE_NOTE, {
     update(cache, { data: { addNote } }) {
       try {
@@ -20,25 +20,25 @@ const CreateCategory = () => {
           data: { me: { ...me, notes: [...me.notes, addNote] } },
         });
       } catch (e) {
-        console.log("First note insertion by user");
+        console.log('First note insertion by user');
       }
     },
   });
 
-  const handleTitleChange = (event) => {
+  const handleTitleChange = event => {
     setnoteTitle(event.target.value);
   };
-  const handleTextChange = (event) => {
+  const handleTextChange = event => {
     setnoteText(event.target.value);
   };
-  const handleSnippetChange = (event) => {
+  const handleSnippetChange = event => {
     setnoteSnippet(event.target.value);
   };
-  const handleTagChange = (event) => {
+  const handleTagChange = event => {
     setTag(event.target.value);
   };
 
-  const handleFormSubmit = async (event) => {
+  const handleFormSubmit = async event => {
     event.preventDefault();
     try {
       // add category to database
@@ -46,18 +46,18 @@ const CreateCategory = () => {
         variables: { noteTitle, noteText, noteSnippet, tag },
       });
 
-      setnoteTitle("");
-      setnoteText("");
-      setnoteSnippet("");
-      setTag("");
-      navigate("/dashboard");
+      setnoteTitle('');
+      setnoteText('');
+      setnoteSnippet('');
+      setTag('');
+      navigate('/dashboard');
     } catch (e) {
       console.error(e);
     }
   };
   return (
     <>
-      <div className="flex flex-col justify-center h-screen sm:p-6 bg-antique">
+      <div className="flex flex-col justify-center h-full sm:p-6 bg-antique">
         <form
           onSubmit={handleFormSubmit}
           className="max-w-[600px] w-full mx-auto bg-cadet/80 p-4"
@@ -80,7 +80,7 @@ const CreateCategory = () => {
 
           <div className="flex flex-col py-2">
             <label htmlFor="noteText" className="text-lg">
-              Code Description:{" "}
+              Code Description:{' '}
             </label>
             <textarea
               name="noteText"
@@ -94,7 +94,7 @@ const CreateCategory = () => {
 
           <div className="flex flex-col py-2">
             <label htmlFor="noteSnippet" className="text-lg">
-              Code:{" "}
+              Code:{' '}
             </label>
             <textarea
               name="noteSnippet"
@@ -108,7 +108,7 @@ const CreateCategory = () => {
 
           <div className="flex flex-col py-2">
             <label htmlFor="tag" className="text-lg">
-              Tag:{" "}
+              Tag:{' '}
             </label>
             <textarea
               name="tag"

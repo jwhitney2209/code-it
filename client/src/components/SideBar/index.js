@@ -1,19 +1,19 @@
-import React, { useState } from "react";
-import Auth from "../../utils/auth";
-import { useQuery } from "@apollo/client";
-import { Link } from "react-router-dom";
-import { QUERY_ME } from "../../utils/queries";
+import React, { useState } from 'react';
+import Auth from '../../utils/auth';
+import { useQuery } from '@apollo/client';
+import { Link } from 'react-router-dom';
+import { QUERY_ME } from '../../utils/queries';
 //import icons
 import {
   VscNewFolder,
   VscNotebook,
   VscListTree,
   VscSearch,
-} from "react-icons/vsc";
-import { GiPowerButton } from "react-icons/gi";
-import Collapsible from "react-collapsible";
+} from 'react-icons/vsc';
+import { GiPowerButton } from 'react-icons/gi';
+import Collapsible from 'react-collapsible';
 
-import NoteList from "../NoteList";
+import NoteList from '../NoteList';
 
 function Sidebar() {
   const { loading, data } = useQuery(QUERY_ME);
@@ -24,15 +24,15 @@ function Sidebar() {
     return <h3>Please add a note!</h3>;
   }
 
-  const logout = (event) => {
+  const logout = event => {
     event.preventDefault();
     Auth.logout();
   };
 
   return (
     <>
-      <div>
-        <div className="flex space-x-2 justify-center">
+      <div className="flex flex-col md:w-[14.8rem] md:h-auto sm:w-full md:left-auto sm:bg-cadet/90 px-1 absolute">
+        <div className="flex space-x-2 justify-center mt-3">
           <NoteList notes={notes} />
         </div>
 
