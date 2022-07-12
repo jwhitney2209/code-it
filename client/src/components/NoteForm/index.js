@@ -76,13 +76,13 @@ const NoteForm = ({ categoryId }) => {
           ></textarea>
         </div>
 
-        <Link
+        <button
           to="/dashboard"
           type="submit"
           className="border w-full my-5 p-2 text-center bg-mellow hover:bg-lime"
         >
           Create
-        </Link>
+        </button>
         {/* share button ? */}
         <div className="flex"></div>
       </form>
