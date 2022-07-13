@@ -1,36 +1,21 @@
-import React, { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import SideBar from '../components/SideBar';
-import { QUERY_ME, QUERY_NOTES } from '../utils/queries';
-import { REMOVE_NOTE } from '../utils/mutations';
-import { useQuery, useMutation } from '@apollo/client';
+import { QUERY_ME } from '../utils/queries';
+import { useQuery } from '@apollo/client';
 import { CopyBlock, dracula } from 'react-code-blocks';
-
 import Auth from '../utils/auth';
-import CategoryList from '../components/CategoryList';
-import NoteList from '../components/NoteList';
-import { IconContext } from 'react-icons';
-import { VscSearch, VscTrash } from 'react-icons/vsc';
-//import icons
+
+
 
 function Dash() {
+  const navigate = useNavigate();
   const { data } = useQuery(QUERY_ME);
   const notes = data?.me.notes || [];
 
-  const [removeNote, { error }] = useMutation(REMOVE_NOTE);
-
-  const deleteNote = async event => {
-    event.preventDefault();
-    // removeNote(event.target.value);
-    console.log(event.target.className);
-  };
-
-  const [searchText, setSearchText] = useState('');
-
-  const handleSearchNote = event => {
-    setSearchText(event.target.value);
-  };
-  //need to work on line 36  to add filter to map `.filter((note) => note.noteText.toLowerCase().includes(searchText))`
+  if (!Auth.loggedIn()) {
+    navigate('/')
+  }
   return (
     <main className="flex md:flex-row sm:flex-col md:min-h-full md:h-full sd:min-h-fit sm:max-h-fit">
       <div className="basis-1/4 sm:w-full sm:max-h-fit min-h-mostscreen">

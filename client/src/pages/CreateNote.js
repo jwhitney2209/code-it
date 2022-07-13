@@ -6,13 +6,13 @@ import { QUERY_ME } from "../utils/queries";
 import SideBar from "../components/SideBar";
 import Auth from "../utils/auth";
 
-const CreateCategory = () => {
+const CreateNote = () => {
   const navigate = useNavigate();
   const [noteTitle, setnoteTitle] = useState("");
   const [noteText, setnoteText] = useState("");
   const [noteSnippet, setnoteSnippet] = useState("");
   const [tag, setTag] = useState("");
-  const [addNote, { error }] = useMutation(CREATE_NOTE, {
+  const [addNote] = useMutation(CREATE_NOTE, {
     update(cache, { data: { addNote } }) {
       try {
         const { me } = cache.readQuery({ query: QUERY_ME });
@@ -39,6 +39,10 @@ const CreateCategory = () => {
     setTag(event.target.value);
   };
 
+  if (!Auth.loggedIn()) {
+    navigate('/')
+  }
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -56,6 +60,8 @@ const CreateCategory = () => {
       console.error(e);
     }
   };
+
+
 
   return (
     <main className="flex md:flex-row  md:min-h-full md:h-full sm:w-full sm:flex-col content-start items-stretch">
@@ -141,4 +147,4 @@ const CreateCategory = () => {
   );
 };
 
-export default CreateCategory;
+export default CreateNote;

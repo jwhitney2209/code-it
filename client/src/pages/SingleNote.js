@@ -6,8 +6,10 @@ import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_NOTE } from "../utils/queries";
 
 import { REMOVE_NOTE } from '../utils/mutations'
-
 import SideBar from "../components/SideBar";
+
+import Auth from "../utils/auth";
+
 
 const SingleNote = (props) => {
   const navigate = useNavigate();
@@ -51,6 +53,9 @@ const SingleNote = (props) => {
     );
   }
 
+  if (!Auth.loggedIn()) {
+    navigate('/')
+  }
   return (
     <main className="flex md:flex-row sm:flex-col sm:items-center md:items-start md:min-h-full sm:w-full content-start sm:min-h-fit sm:max-h-fit items-stretch">
       <div className="basis-1/5 sm:w-full items-stretch md:max-h-max md:min-h-mostscreen sm:max-h-fit sm-hidden">
