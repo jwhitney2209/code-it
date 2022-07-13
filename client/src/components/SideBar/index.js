@@ -32,7 +32,7 @@ function Sidebar() {
   }
 
   return (
-    <div className="flex flex-col justify-between bg-cadet p-2 min-h-mostscreen max-h-max " id="sidenav">
+    <div className="flex flex-col justify-between bg-cadet p-2 border-right min-h-mostscreen max-h-max " id="sidenav">
       <div>
         <div className="flex flex-row p-1 md:mx-2 md:mt-3 sm:mx-1 sm:mt-4 align-items: center justify-items-start bg-lime rounded-2xl border">
           <VscSearch size={20} className="fill-liver pl-1" />

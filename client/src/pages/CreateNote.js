@@ -63,13 +63,13 @@ const CreateCategory = () => {
       </div>
 
       <div className="basis-4/5 max-h-mostscreen bg-mellow sm:w-full p-3">
-        <div className="bg-antique rounded m-4 p-4 note-height overflow-y-auto scrollbar">
+        <div className="bg-antique rounded m-4 p-4 note-height note-view overflow-y-auto scrollbar">
           <form onSubmit={handleFormSubmit} className=" ">
-            <h2 className="text-3xl font-bold text-center py-6">
+            <h2 className="text-3xl font-bold text-center pt-6">
               Create a Note
             </h2>
 
-            <div className="flex py-2">
+            <div className="flex w-full pb-2 ">
               <input
                 name="noteTitle"
                 onChange={handleTitleChange}
@@ -89,7 +89,7 @@ const CreateCategory = () => {
                 rows={5}
                 onChange={handleTextChange}
                 value={noteText.noteText}
-                className="block border p-2 rounded"
+                className="block border p-2 rounded focus:outline-cadet"
                 placeholder="Describe your code..."
               ></textarea>
             </div>
@@ -103,8 +103,8 @@ const CreateCategory = () => {
                 rows={10}
                 onChange={handleSnippetChange}
                 value={noteSnippet.noteSnippet}
-                className="block border p-2 rounded"
-                placeholder="Your Code Here"
+                className="block border p-2 rounded focus:outline-cadet"
+                placeholder="Add Your Code Here"
               ></textarea>
             </div>
 
@@ -116,7 +116,7 @@ const CreateCategory = () => {
                 name="tag"
                 onChange={handleTagChange}
                 value={tag.tag}
-                className="block border p-2 rounded"
+                className="block border p-2 rounded focus:outline-cadet"
                 placeholder="Add a tag"
               ></textarea>
             </div>

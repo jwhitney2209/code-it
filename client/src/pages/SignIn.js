@@ -53,6 +53,7 @@ function SignIn() {
           collection. Log in below or create an account to get started.
         </p>
       </div>
+      
       <div className="flex flex-col justify-center sm:p-6">
         <form onSubmit={handleFormSubmit} className="max-w-[400px] w-full mx-auto bg-antique p-4">
           <h2 className="text-3xl font-bold text-center py-6">
@@ -63,17 +64,17 @@ function SignIn() {
             <input name="email" 
               onChange={handleChange} 
               value={formState.email}
-              className="border p-2" type="text" />
+              className="border p-2 focus:outline-cadet" type="text" />
           </div>
           <div className="flex flex-col py-2">
             <label htmlFor="password">password:</label>
             <input name="password"
               onChange={handleChange} 
-              value={formState.password}className="border p-2" type="password" />
+              value={formState.password} className="border p-2 focus:outline-cadet" type="password" />
           </div>
           <button type="submit" className="border w-full my-5 p-2 text-center bg-mellow hover:bg-lime">Sign In</button>
           <div className="flex">
-            Don't have an account?<Link to="/signup" className=" px-2 hover:text-cadet">Create one here!</Link>
+            Don't have an account?<Link to="/signup" className=" px-2 text-cadet hover:text-mellow">Create one here!</Link>
           </div>
         </form>
         {error && <div>Login failed</div>}

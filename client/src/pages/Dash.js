@@ -21,7 +21,7 @@ function Dash() {
       </div>
       <div className="basis-3/4 min-h-mostscreen bg-mellow sm:w-full">
         <h3 className="text-center md:text-3xl sm:text-xl m-5">
-          Please select a note to view.
+          Please select a note to view, or create a new note.
         </h3>
       </div>
     </main>
