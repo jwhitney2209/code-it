@@ -10,6 +10,8 @@ module.exports = {
       'lime': '#cafe48',
       'code': '#282a36',
       'pale': '#faf5ee',
+      'red': '#ff0000',
+      'black': '#000000',
     },
     screens: {
       sm: '320px',

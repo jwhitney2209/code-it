@@ -1,19 +1,29 @@
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import SideBar from "../components/SideBar";
-import { QUERY_ME } from "../utils/queries";
-import { useQuery } from "@apollo/client";
+import { QUERY_ME, QUERY_NOTES } from "../utils/queries";
+import { REMOVE_NOTE } from "../utils/mutations";
+import { useQuery, useMutation } from "@apollo/client";
 import { CopyBlock, dracula } from "react-code-blocks";
 
 import Auth from "../utils/auth";
 import CategoryList from "../components/CategoryList";
 import NoteList from "../components/NoteList";
-import { VscSearch } from "react-icons/vsc";
+import { IconContext } from "react-icons";
+import { VscSearch, VscTrash } from "react-icons/vsc";
 //import icons
 
 function Dash() {
   const { data } = useQuery(QUERY_ME);
   const notes = data?.me.notes || [];
+
+  const [removeNote, { error }] = useMutation(REMOVE_NOTE);
+
+  const deleteNote = async (event) => {
+    event.preventDefault();
+    // removeNote(event.target.value);
+    console.log(event.target.className);
+  };
 
   const [searchText, setSearchText] = useState("");
 
@@ -34,7 +44,7 @@ function Dash() {
         <div className="flex flex-row flex-wrap gap-4 md:m-5 sm:m-3 md:p-4 sm:p-3">
           {notes &&
             notes.map((notes) => (
-              <div className="" key={notes._id}>
+              <div id={notes._id} className="" key={notes._id}>
                 <div className="m-3 p-3 bg-antique rounded note-view max-w-md max-h-96">
                   <Link
                     key={notes._id}
@@ -46,7 +56,11 @@ function Dash() {
                     </h4>
                   </Link>
                   <div className="max-h-64 overflow-y-scroll scrollbar-mini">
-                    <CopyBlock text={notes.noteSnippet} theme={dracula} />
+                    <CopyBlock
+                      text={notes.noteSnippet}
+                      language="markup"
+                      theme={dracula}
+                    />
                   </div>
                 </div>
               </div>
