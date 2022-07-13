@@ -24,7 +24,9 @@
   - [License](#license)
 
   ## Installation
-  Download the files, 'npm init -y', 'npm i', 'npm run develop'. Make sure Mongod is running.
+  ```npm i``` <br />
+  ```npm run develop``` <br />
+  macOS: Make sure Mongod is running.
 
   ## Usage
   Note Taking for Developers.
@@ -33,7 +35,7 @@
   Jason Whitney, Ally Garcia, and Max Cain.
 
   ## Tests
-  n/a
+  No tests available at this time.
 
   ## Contributors
   Checkout Max's GitHub: [pixiepucker!](https://github.com/pixiepucker)
