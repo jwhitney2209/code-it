@@ -8,17 +8,10 @@ body {
   min-height: 100vh;
 }
 
-.min-h-mostscreen {
-  min-height: 90vh;
-}
-
 .max-h-mostscreen {
   max-height: 90vh;
 }
 
-.note-height {
-  max-height: 82vh;
-}
 
 .scrollbar::-webkit-scrollbar {
   width: 12px;
@@ -29,6 +22,7 @@ body {
   background: transparent;
 }
 
+
 .scrollbar::-webkit-scrollbar-thumb {
   margin:auto;
   background: 
@@ -38,9 +32,35 @@ body {
   #d9dce0;
 }
 
+.scrollbar-mini::-webkit-scrollbar {
+  width: 6px;
+  height: auto;
+  background: transparent;
+}
+
+.scrollbar-mini::-webkit-scrollbar-track {
+  background: transparent;
+  margin-left: 2px;
+
+}
+
+.scrollbar-mini::-webkit-scrollbar-thumb {
+  margin:auto;
+  background: 
+  #7cb4b8;
+  border-radius: 100vh;
+  border: 3px solid 
+  #7cb4b8;
+}
+
 .note-border {
   border-bottom: 2px solid black;
-  box-shadow: 0px 5px 2px -2px rgba(0,0,0,0.4);
+  box-shadow: 0px 5px 2px -2px rgba(0, 0, 0, 0.4);
+}
+
+.new-note {
+  border-bottom: 2px solid rgb(82, 73, 72,0.6);
+  box-shadow: 0px 5px 2px -2px rgba(82, 73, 72,0.4);
 }
 
 .note-view {
@@ -52,6 +72,17 @@ body {
   border-style: ridge;
 }
 
-.test {
-  color: #faf5ee; 
+@media (min-width: 768px) {
+  .note-height {
+    max-height: 77vh;
+  }
+  .min-h-mostscreen {
+    min-height: 90vh;
+  }
+}
+
+@media (max-width: 640px) {
+  .sm-hidden {
+    display: none;
+  }
 }

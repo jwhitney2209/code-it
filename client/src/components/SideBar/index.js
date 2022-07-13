@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Auth from "../../utils/auth";
+import NoteList from "../NoteList";
 import { useQuery } from "@apollo/client";
 import { Link } from "react-router-dom";
 import { QUERY_ME } from "../../utils/queries";
@@ -13,7 +14,7 @@ import {
 import { GiPowerButton } from "react-icons/gi";
 import Collapsible from "react-collapsible";
 
-import NoteList from "../NoteList";
+
 
 function Sidebar() {
   const [searchText, setSearchText] = useState("");
@@ -37,8 +38,8 @@ function Sidebar() {
   // }
 
   return (
-    <div className="flex flex-col justify-between bg-cadet p-2 border-right min-h-mostscreen max-h-max " id="sidenav">
-      <div>
+    <div className="flex sm:p-4 flex-col md:justify-between bg-cadet p-2 border-right min-h-mostscreen md:max-h-max sm:max-h-fit" id="sidenav">
+      <div className="">
         <div className="flex flex-row p-1 md:mx-2 md:mt-3 sm:mx-1 sm:mt-4 align-items: center justify-items-start bg-lime rounded-2xl border">
           <VscSearch size={20} className="fill-liver pl-1" />
           <input
@@ -54,23 +55,23 @@ function Sidebar() {
           <Link
             to="/createnote"
             type="button"
-            className="border w-full inline-block px-6 my-2 py-2.5 bg-mellow hover:bg-lime text-liver font-medium text-xs leading-tight uppercase transition duration-150 ease-in-out"
+            className="border w-full inline-block px-6 my-2 py-2.5 bg-mellow hover:bg-lime text-liver font-medium text-xs leading-tight uppercase transition duration-150 ease-in-out md:text-base sm:text-sm"
           >
             [+] Add Note
           </Link>
         </div>
 
-        <div className="flex space-x-2 justify-start mt-3 overscroll-contain">
+        <div className="flex space-x-2 justify-start mt-3 overscroll-contain sm-hidden">
           <NoteList 
             notes={notes.filter((note) => note.noteText.toLowerCase().includes(searchText))} />
         </div>
       </div>
 
-      <div>
+      <div className="sm:mx-3 sm-hidden">
         <div className="flex space-x-2 justify-center">
           <button
             type="button"
-            className="border w-full inline-block px-6 my-2 py-2.5 bg-mellow hover:bg-lime text-liver font-medium text-xs leading-tight uppercase transition duration-150 ease-in-out"
+            className="border w-full inline-block px-6 my-2 md:py-2.5 sm:py-1 md:bg-mellow md:hover:bg-lime text-liver font-medium text-xs leading-tight uppercase transition duration-150 ease-in-out md:text-base sm:text-sm sm:bg-lime"
             onClick={logout}
           >
             logout

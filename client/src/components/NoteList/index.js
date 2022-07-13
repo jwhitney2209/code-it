@@ -19,8 +19,8 @@ const NoteList = (props) => {
               className="hover:text-lime font-thin text-liver flex items-center transition-colors duration-200 justify-start"
               to={`/singlenote/${notes._id}`}
             >
-              <span className="text-left"></span>
-              <span className="text-md font-normal">[{notes.tag}] {notes.noteTitle}</span>
+    
+              <ul className="text-md font-normal">[{notes.tag}] {notes.noteTitle}</ul>
             </Link>
           </div>
         ))}

@@ -31,12 +31,18 @@ const SingleNote = (props) => {
   }
 
   return (
-    <main className="flex flex-row  min-h-full md:h-full sm:w-full content-start items-stretch">
-      <div className="basis-1/5 h-full sm:w-full items-stretch max-h-max min-h-mostscreen">
+    <main className="flex md:flex-row sm:flex-col sm:items-center md:items-start md:min-h-full sm:w-full content-start sm:min-h-fit sm:max-h-fit items-stretch">
+      <div className="basis-1/5 sm:w-full items-stretch md:max-h-max md:min-h-mostscreen sm:max-h-fit sm-hidden">
         <SideBar />
       </div>
 
-      <div className="basis-4/5 max-h-mostscreen bg-mellow sm:w-full p-3">
+      <div className="basis-4/5 min-h-mostscreen bg-mellow sm:w-full p-3">
+        <div className="md:hidden sm:px-6 text-s text-liver hover:text-cadet">
+          <Link to="/dashboard">
+            <p>&#60; All Notes</p>
+          </Link>
+        </div>
+
         <div className="flex flex-col gap-4 bg-antique note-view rounded m-4 p-4 note-height overflow-y-auto scrollbar sm:p-6">
           <div className="flex flex-row md:text-3xl sm:text-lg">
             <p className="note-border">{note.noteTitle}</p>
