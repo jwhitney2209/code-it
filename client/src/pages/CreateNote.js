@@ -76,7 +76,7 @@ const CreateCategory = () => {
                 value={noteTitle.noteTitle}
                 type="text"
                 placeholder="Add Title Here"
-                className="p-2 outline-none bg-antique md:text-3xl sm:text-lg"
+                className="p-2 outline-none bg-antique note-border md:text-3xl sm:text-lg"
               />
             </div>
 
@@ -89,7 +89,7 @@ const CreateCategory = () => {
                 rows={5}
                 onChange={handleTextChange}
                 value={noteText.noteText}
-                className="block border p-2 rounded focus:outline-cadet"
+                className="block border p-2 rounded mx-w-full focus:outline-cadet"
                 placeholder="Describe your code..."
               ></textarea>
             </div>
@@ -103,7 +103,7 @@ const CreateCategory = () => {
                 rows={10}
                 onChange={handleSnippetChange}
                 value={noteSnippet.noteSnippet}
-                className="block border p-2 rounded focus:outline-cadet"
+                className="block border p-2 rounded bg-code text-antique focus:outline-cadet"
                 placeholder="Add Your Code Here"
               ></textarea>
             </div>
@@ -123,7 +123,7 @@ const CreateCategory = () => {
 
             <button
               type="submit"
-              className="border w-full my-5 p-2 text-center bg-lime hover:bg-cadet"
+              className="border min:w-fill my-5 p-2 text-center bg-lime hover:bg-cadet"
             >
               Create
             </button>

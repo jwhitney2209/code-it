@@ -25,11 +25,11 @@ function Sidebar() {
     Auth.logout();
   };
 
-  console.log(notes);
-  if (!notes.length) {
-    return;
-    <p> Please add a note! </p>;
-  }
+  // console.log(notes);
+  // if (!notes.length) {
+  //   return;
+  //   <p> Please add a note! </p>;
+  // }
 
   return (
     <div className="flex flex-col justify-between bg-cadet p-2 border-right min-h-mostscreen max-h-max " id="sidenav">

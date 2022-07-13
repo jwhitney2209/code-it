@@ -15,7 +15,7 @@ function Dash() {
   const loggedIn = Auth.loggedIn();
 
   return (
-    <main className="flex flex-row items-center min-h-full md:h-full">
+    <main className="flex md:flex-row sm:flex-col items-center min-h-full md:h-full">
       <div className="basis-1/4 sm:w-full">
         <SideBar />
       </div>

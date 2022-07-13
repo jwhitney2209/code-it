@@ -51,3 +51,7 @@ body {
   border-right: 3px solid rgba(73, 102, 104, 0.3);
   border-style: ridge;
 }
+
+.test {
+  color: #faf5ee; 
+}

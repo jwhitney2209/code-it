@@ -6,7 +6,7 @@ const NoteList = (props) => {
   // console.log(props)
 
   if (!noteData.length) {
-    return <h3>No notes Yet!</h3>;
+    return <p>No notes Yet! Please click "Add Note" above to create your first note.</p>;
   }
 
   return (
