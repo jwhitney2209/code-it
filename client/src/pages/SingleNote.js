@@ -1,21 +1,42 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { CopyBlock, dracula } from "react-code-blocks";
 
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_NOTE } from "../utils/queries";
+
+import { REMOVE_NOTE } from '../utils/mutations'
 
 import SideBar from "../components/SideBar";
 
 const SingleNote = (props) => {
+  const navigate = useNavigate();
   console.log(props);
   const { id: noteId } = useParams();
+
+  const [removeNote] = useMutation(REMOVE_NOTE);
 
   const { loading, data } = useQuery(QUERY_NOTE, {
     variables: { id: noteId },
   });
+
   console.log(data);
   const note = data?.note || {};
+
+  const deleteNote = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await removeNote({
+        variables: { id: noteId },
+      })
+
+      navigate('/dashboard')
+      window.location.reload()
+      console.log("response from server:", response)
+    } catch (e) {
+      console.error(e)
+    }
+  }
 
   if (loading) {
     return (
@@ -70,6 +91,9 @@ const SingleNote = (props) => {
           >
             Go Back
           </Link>
+          <button onClick={deleteNote} className="border w-[6.5rem] inline-block px-6 my-2 py-2.5 bg-red hover:bg-red/60 text-liver font-medium text-xs leading-tight uppercase transition duration-150 ease-in-out">
+            Delete
+          </button>
         </div>
       </div>
     </main>

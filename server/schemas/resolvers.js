@@ -111,14 +111,9 @@ const resolvers = {
       }
     },
     removeNote: async (parent, { _id }, context) => {
-      const categoryModel = await User.findByIdAndUpdate(
-        { _id: context.user._id },
-        { $pull: { notes: { _id } } },
-        { new: true }
-      )
-      await Note.findByIdAndDelete({ _id })
-
-      return categoryModel;
+      console.log('login id:', _id)
+      const note = await Note.findByIdAndDelete({ _id })
+      return note;
     },
   },
 };
