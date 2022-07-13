@@ -16,13 +16,7 @@ import Collapsible from "react-collapsible";
 
 
 
-function Sidebar() {
-  const [searchText, setSearchText] = useState("");
-
-  const handleSearchNote = (event) => {
-    setSearchText(event.target.value);
-  };
-
+function Sidebar( { handleSearchNote, searchText }) {
   const { loading, data } = useQuery(QUERY_ME);
 
   const notes = data?.me.notes || [];
@@ -47,7 +41,8 @@ function Sidebar() {
             type="text"
             value={searchText}
             placeholder="type to search"
-            onChange={handleSearchNote}
+            onChange= {(event) => 
+              handleSearchNote(event.target.value)}
           />
         </div>
 
