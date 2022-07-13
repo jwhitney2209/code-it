@@ -56,6 +56,7 @@ const CreateCategory = () => {
       console.error(e);
     }
   };
+
   return (
     <main className="flex flex-row  min-h-full md:h-full sm:w-full content-start items-stretch">
       <div className="basis-1/5 h-full sm:w-full items-stretch max-h-max min-h-mostscreen">

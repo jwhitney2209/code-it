@@ -17,6 +17,11 @@ import NoteList from "../NoteList";
 
 function Sidebar() {
   const [searchText, setSearchText] = useState("");
+
+  const handleSearchNote = (event) => {
+    setSearchText(event.target.value);
+  };
+
   const { loading, data } = useQuery(QUERY_ME);
 
   const notes = data?.me.notes || [];
@@ -39,8 +44,9 @@ function Sidebar() {
           <input
             className="border-none bg-lime pl-2 focus:outline-none caret-liver text-liver"
             type="text"
+            value={searchText}
             placeholder="type to search"
-            onChange={setSearchText}
+            onChange={handleSearchNote}
           />
         </div>
 
@@ -55,7 +61,8 @@ function Sidebar() {
         </div>
 
         <div className="flex space-x-2 justify-start mt-3 overscroll-contain">
-          <NoteList notes={notes} />
+          <NoteList 
+            notes={notes.filter((note) => note.noteText.toLowerCase().includes(searchText))} />
         </div>
       </div>
 

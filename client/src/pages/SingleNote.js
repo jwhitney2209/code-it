@@ -19,7 +19,7 @@ const SingleNote = (props) => {
 
   if (loading) {
     return (
-      <div class="flex justify-center items-center">
+      <div class="flex justify-center items-center min-h-mostscreen">
         <div
           class="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full"
           role="status"

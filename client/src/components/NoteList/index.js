@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const NoteList = (props) => {
   const noteData = props.notes;
-  // console.log(props)
+  //console.log(props)
 
   if (!noteData.length) {
     return <p>No notes Yet! Please click "Add Note" above to create your first note.</p>;
