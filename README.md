@@ -24,8 +24,8 @@
   - [License](#license)
 
   ## Installation
-  ```npm i``` <br />
-  ```npm run develop``` <br />
+  ```npm install``` in root directory<br />
+  ```npm run develop``` in root directory<br />
   macOS: Make sure Mongod is running.
 
   ## Usage
