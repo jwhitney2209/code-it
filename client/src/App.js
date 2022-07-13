@@ -14,6 +14,7 @@ import Dash from "./pages/Dash";
 import Footer from "./components/Footer";
 import CreateNote from "./pages/CreateNote";
 import SingleNote from "./pages/SingleNote";
+
 import NoteForm from "./components/NoteForm";
 import Sidebar from "./components/SideBar/index";
 import Auth from "./utils/auth";
