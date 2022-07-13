@@ -1,31 +1,34 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
   createHttpLink,
-} from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
-import Header from './components/Header';
-import SignIn from './pages/SignIn';
-import CreateAccount from './pages/CreateAccount';
-import Dash from './pages/Dash';
-import Footer from './components/Footer';
-import CreateNote from './pages/CreateNote';
-import SingleNote from './pages/SingleNote';
-import NoteForm from './components/NoteForm';
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
+import Header from "./components/Header";
+import SignIn from "./pages/SignIn";
+import CreateAccount from "./pages/CreateAccount";
+import Dash from "./pages/Dash";
+import Footer from "./components/Footer";
+import CreateNote from "./pages/CreateNote";
+import SingleNote from "./pages/SingleNote";
+
+import NoteForm from "./components/NoteForm";
+import Sidebar from "./components/SideBar/index";
+import Auth from "./utils/auth";
 
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: "/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('id_token');
+  const token = localStorage.getItem("id_token");
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : '',
+      authorization: token ? `Bearer ${token}` : "",
     },
   };
 });
@@ -36,6 +39,8 @@ const client = new ApolloClient({
 });
 
 function App() {
+
+  const loggedIn = Auth.loggedIn();
 
   return (
     <ApolloProvider client={client}>
@@ -48,6 +53,7 @@ function App() {
             <Route path="/dashboard" element={<Dash />} />
             <Route path="/createnote" element={<CreateNote />} />
             <Route path="/singlenote/:id" element={<SingleNote />} />
+            <Route path="/sidebar" element={<Sidebar />} />
           </Routes>
 
           <Footer />

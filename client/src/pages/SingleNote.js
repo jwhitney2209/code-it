@@ -2,12 +2,12 @@ import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { CopyBlock, dracula } from 'react-code-blocks';
 
-import { useQuery } from '@apollo/client';
-import { QUERY_NOTE } from '../utils/queries';
+import { useQuery } from "@apollo/client";
+import { QUERY_NOTE } from "../utils/queries";
 
-import SideBar from '../components/SideBar';
+import SideBar from "../components/SideBar";
 
-const SingleNote = props => {
+const SingleNote = (props) => {
   console.log(props);
   const { id: noteId } = useParams();
 
@@ -31,10 +31,16 @@ const SingleNote = props => {
   }
 
   return (
-    <>
-      <div className="flex flex-col justify-center h-screen w-full text-liver bg-mellow">
-        <div className="sm:p-6">
-          <div className="max-w-[400px] w-full mx-auto bg-antique p-4">
+
+    <main className="flex flex-row  min-h-full md:h-full sm:w-full content-start items-stretch">
+      <div className="basis-1/5 h-full sm:w-full items-stretch max-h-max min-h-mostscreen">
+        <SideBar />
+      </div>
+
+      <div className="basis-4/5 max-h-mostscreen bg-mellow sm:w-full p-3">
+        <div className="bg-antique rounded m-4 p-4 note-height overflow-y-auto scrollbar">
+          <div className="sm:p-6">
+            <div className="max-w-[400px] w-full mx-auto bg-antique p-4">
           <h1><strong>Title:</strong></h1>
             <p>{note.noteTitle}</p>
             <h1><strong>Description:</strong></h1>
@@ -56,7 +62,7 @@ const SingleNote = props => {
           </div>
         </div>
       </div>
-    </>
+    </main>
   );
 };
 

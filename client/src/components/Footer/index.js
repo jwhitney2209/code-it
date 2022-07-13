@@ -27,7 +27,7 @@ const Footer = () => {
               ></path>
             </svg>
           </a>
-          <div className="p-4">
+          <div className="pb-4">
             <p>
               Code_It was built with love for code and all developers near and
               far.
