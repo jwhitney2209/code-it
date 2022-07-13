@@ -8,6 +8,8 @@ module.exports = {
       'cadet': '#7cb4b8',
       'mellow': '#f6bc79',
       'lime': '#cafe48',
+      'code': '#282a36',
+      'pale': '#faf5ee',
     },
     screens: {
       sm: '320px',

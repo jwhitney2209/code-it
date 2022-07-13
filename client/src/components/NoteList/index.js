@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 
 const NoteList = (props) => {
   const noteData = props.notes;
-  // console.log(props)
+  //console.log(props)
 
   if (!noteData.length) {
-    return <h3>No notes Yet!</h3>;
+    return <p>No notes Yet! Please click "Add Note" above to create your first note.</p>;
   }
 
   return (
@@ -19,8 +19,8 @@ const NoteList = (props) => {
               className="hover:text-lime font-thin text-liver flex items-center transition-colors duration-200 justify-start"
               to={`/singlenote/${notes._id}`}
             >
-              <span className="text-left"></span>
-              <span className="text-md font-normal">[{notes.tag}] {notes.noteTitle}</span>
+    
+              <ul className="text-md font-normal">[{notes.tag}] {notes.noteTitle}</ul>
             </Link>
           </div>
         ))}

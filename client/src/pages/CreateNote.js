@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { CREATE_NOTE } from "../utils/mutations";
 import { QUERY_ME } from "../utils/queries";
@@ -56,27 +56,34 @@ const CreateCategory = () => {
       console.error(e);
     }
   };
+
   return (
-    <main className="flex flex-row  min-h-full md:h-full sm:w-full content-start items-stretch">
-      <div className="basis-1/5 h-full sm:w-full items-stretch max-h-max min-h-mostscreen">
+    <main className="flex md:flex-row  md:min-h-full md:h-full sm:w-full sm:flex-col content-start items-stretch">
+      <div className="basis-1/5 h-full sm:w-full items-stretch md:max-h-max md:min-h-mostscreen sm-hidden">
         <SideBar />
       </div>
 
-      <div className="basis-4/5 max-h-mostscreen bg-mellow sm:w-full p-3">
-        <div className="bg-antique rounded m-4 p-4 note-height overflow-y-auto scrollbar">
+      <div className="basis-4/5 md:max-h-mostscreen sm:max-h-fit bg-mellow sm:w-full p-3">
+        <div className="sm:px-6 md:text-xl sm:text-s text-liver hover:text-cadet">
+          <Link to="/dashboard">
+            <p>&#60; Exit</p>
+          </Link>
+        </div>
+
+        <div className="bg-antique rounded m-4 p-4 note-height note-view overflow-y-auto scrollbar">
           <form onSubmit={handleFormSubmit} className=" ">
-            <h2 className="text-3xl font-bold text-center py-6">
+            <h2 className="text-3xl font-bold text-center pt-6">
               Create a Note
             </h2>
 
-            <div className="flex py-2">
+            <div className="flex w-full pb-2 ">
               <input
                 name="noteTitle"
                 onChange={handleTitleChange}
                 value={noteTitle.noteTitle}
                 type="text"
                 placeholder="Add Title Here"
-                className="p-2 outline-none bg-antique md:text-3xl sm:text-lg"
+                className="p-2 outline-none bg-antique new-note md:text-3xl sm:text-lg"
               />
             </div>
 
@@ -89,7 +96,7 @@ const CreateCategory = () => {
                 rows={5}
                 onChange={handleTextChange}
                 value={noteText.noteText}
-                className="block border p-2 rounded"
+                className="block border p-2 rounded mx-w-full focus:outline-cadet"
                 placeholder="Describe your code..."
               ></textarea>
             </div>
@@ -103,8 +110,8 @@ const CreateCategory = () => {
                 rows={10}
                 onChange={handleSnippetChange}
                 value={noteSnippet.noteSnippet}
-                className="block border p-2 rounded"
-                placeholder="Your Code Here"
+                className="block border p-2 rounded bg-code text-antique focus:outline-cadet"
+                placeholder="Add Your Code Here"
               ></textarea>
             </div>
 
@@ -116,14 +123,14 @@ const CreateCategory = () => {
                 name="tag"
                 onChange={handleTagChange}
                 value={tag.tag}
-                className="block border p-2 rounded"
+                className="block border p-2 rounded focus:outline-cadet"
                 placeholder="Add a tag"
               ></textarea>
             </div>
 
             <button
               type="submit"
-              className="border w-full my-5 p-2 text-center bg-lime hover:bg-cadet"
+              className="border min:w-fill my-5 p-2 text-center bg-lime hover:bg-cadet"
             >
               Create
             </button>

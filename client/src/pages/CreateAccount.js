@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom';
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../utils/mutations";
 
@@ -35,14 +36,14 @@ const CreateAccount = () => {
   };
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-1 w-full bg-cadet md:p-12">
-      <div className="md:p-6 sm:p-4 flex flex-wrap justify-center">
+    <div className="flex md:flex-row sm:flex-col w-full bg-cadet md:p-12 items-center">
+      <div className="md:p-3 sm:p-4 flex flex-wrap justify-center sm:w-screen">
         <img
           src={require("../assets/images/logo.png")}
           className="pb-2"
           alt="note w code on it"
         />
-        <p className="sm:text-center sm:text-xl md:text-left md:text-3xl">
+        <p className="sm:text-center sm:text-xl md:text-2xl">
           Code_It is a noting-taking app made especially for your code. When you
           create a note, you can add code snippets and personal notations. You
           can also edit, delete, and share them at any time. Create folders to
@@ -50,7 +51,8 @@ const CreateAccount = () => {
           collection. Log in below or create an account to get started.
         </p>
       </div>
-      <div className="flex flex-col justify-center sm:p-6">
+
+      <div className="flex justify-center md:p-3 sm:p-6 sm:w-screen h-fit">
         <form
           onSubmit={handleFormSubmit}
           className="max-w-[400px] w-full mx-auto bg-antique p-4"
@@ -88,6 +90,9 @@ const CreateAccount = () => {
           <button className="border w-full my-5 py-2 bg-mellow">
             Create Account
           </button>
+          <div className="flex sm:text-sm">
+            Already have an account?<Link to="/" className="px-2 text-cadet hover:text-mellow">Log in here!</Link>
+          </div>
         </form>
         {error && <div>Signup failed</div>}
       </div>
