@@ -57,8 +57,9 @@ const SingleNote = (props) => {
         <SideBar />
       </div>
 
+  
       <div className="basis-4/5 min-h-mostscreen bg-mellow sm:w-full p-3">
-        <div className="md:hidden sm:px-6 text-s text-liver hover:text-cadet">
+        <div className="sm:px-6 text-s text-liver hover:text-cadet">
           <Link to="/dashboard">
             <p>&#60; All Notes</p>
           </Link>
@@ -85,14 +86,8 @@ const SingleNote = (props) => {
 
           <h1>Created {note.createdAt}</h1>
 
-          <Link
-            to="/dashboard"
-            className="border w-[6.5rem] inline-block px-6 my-2 py-2.5 bg-lime hover:bg-cadet text-liver font-medium text-xs leading-tight uppercase transition duration-150 ease-in-out"
-          >
-            Go Back
-          </Link>
-          <button onClick={deleteNote} className="border w-[6.5rem] inline-block px-6 my-2 py-2.5 bg-red hover:bg-red/60 text-liver font-medium text-xs leading-tight uppercase transition duration-150 ease-in-out">
-            Delete
+          <button onClick={deleteNote} className="border w-[6.5rem] inline-block px-2 my-2 py-2.5 bg-red/70 hover:bg-red text-black text-sm leading-tight transition duration-150 ease-in-out">
+            DELETE NOTE
           </button>
         </div>
       </div>
