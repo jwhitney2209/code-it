@@ -1,9 +1,10 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { CopyBlock, dracula } from "react-code-blocks";
+import { REMOVE_NOTE } from '../utils/mutations';
 
-import { useQuery } from "@apollo/client";
-import { QUERY_NOTE } from "../utils/queries";
+import { useQuery, useMutation } from "@apollo/client";
+import { QUERY_ME, QUERY_NOTE } from "../utils/queries";
 
 import SideBar from "../components/SideBar";
 
@@ -14,6 +15,41 @@ const SingleNote = (props) => {
   const { loading, data } = useQuery(QUERY_NOTE, {
     variables: { id: noteId },
   });
+
+  const [removeNote, { error }] = useMutation(REMOVE_NOTE, {
+    update(cache, { data: { removeNote } }) {
+      try {
+        const { me } = cache.readQuery({ query: QUERY_ME });
+        cache.writeQuery({
+          query: QUERY_ME,
+          data: { me: { ...me, notes: [...me.notes, removeNote] } },
+        });
+      } catch (e) {
+        console.log("Note deleted by user");
+      }
+    },
+  });
+
+  const handleNoteDelete = async (event) => {
+    event.preventDefault();
+    try {
+      await removeNote({
+        variables: { noteTitle, noteText, noteSnippet, tag },
+      });
+
+      setnoteTitle("");
+      setnoteText("");
+      setnoteSnippet("");
+      setTag("");
+      navigate("/dashboard");
+    }
+    catch(e) {
+      console.error(e)
+    }
+  };
+
+
+
   console.log(data);
   const note = data?.note || {};
 
@@ -69,6 +105,13 @@ const SingleNote = (props) => {
             className="border w-[6.5rem] inline-block px-6 my-2 py-2.5 bg-lime hover:bg-cadet text-liver font-medium text-xs leading-tight uppercase transition duration-150 ease-in-out"
           >
             Go Back
+          </Link>
+          <Link
+            onClick={handleNoteDelete}
+            to="/dashboard"
+            className="border w-[6.5rem] inline-block px-6 my-2 py-2.5 bg-lime hover:bg-cadet text-liver font-medium text-xs leading-tight uppercase transition duration-150 ease-in-out"
+          >
+            DELETE NOTE
           </Link>
         </div>
       </div>

@@ -22,8 +22,8 @@ const resolvers = {
     },
     user: async (parent, { username }) => {
       return User.findOne({ username })
-        .select('-__v -password')
-        .populate('categories');
+        .select("-__v -password")
+        .populate("categories");
     },
     // find categories by userId
     categories: async (parent, { username }) => {
@@ -92,7 +92,11 @@ const resolvers = {
 
       throw new AuthenticationError("You must be logged in to save a note!");
     },
-    addNote: async (parent,{ noteTitle, noteText, noteSnippet, tag },context) => {
+    addNote: async (
+      parent,
+      { noteTitle, noteText, noteSnippet, tag },
+      context
+    ) => {
       if (context.user) {
         const note = await Note.create({
           tag,
@@ -102,23 +106,16 @@ const resolvers = {
           userId: context.user._id,
         });
         await User.findByIdAndUpdate(
-          { _id: context.user._id},
-          { $push: {notes: note}},
+          { _id: context.user._id },
+          { $push: { notes: note } },
           { new: true }
-        )
+        );
 
         return note;
       }
     },
     removeNote: async (parent, { _id }, context) => {
-      const categoryModel = await User.findByIdAndUpdate(
-        { _id: context.user._id },
-        { $pull: { notes: { _id } } },
-        { new: true }
-      )
-      await Note.findByIdAndDelete({ _id })
-
-      return categoryModel;
+      Note.findByIdAndDelete({ _id });
     },
   },
 };
