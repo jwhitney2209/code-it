@@ -38,7 +38,7 @@ function Dash() {
       </div>
 
       <div className="flex-col basis-3/4 min-h-mostscreen max-h-mostscreen bg-mellow sm:w-full overflow-auto scrollbar">
-        <h3 className="text-center md:text-3xl sm:text-xl m-5">
+        <h3 className="text-center md:text-3xl sm:text-xl m-5 new-note">
           Please select a note to view, or create a new note.
         </h3>
         <div className="flex flex-row flex-wrap gap-4 md:m-5 sm:m-3 md:p-4 sm:p-3">
