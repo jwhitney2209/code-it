@@ -6,13 +6,9 @@ import { Link } from "react-router-dom";
 import { QUERY_ME } from "../../utils/queries";
 //import icons
 import {
-  VscNewFolder,
-  VscNotebook,
-  VscListTree,
   VscSearch,
 } from "react-icons/vsc";
-import { GiPowerButton } from "react-icons/gi";
-import Collapsible from "react-collapsible";
+
 
 
 
@@ -23,6 +19,7 @@ function Sidebar() {
     setSearchText(event.target.value);
   };
 
+// eslint-disable-next-line
   const { loading, data } = useQuery(QUERY_ME);
 
   const notes = data?.me.notes || [];
@@ -30,12 +27,6 @@ function Sidebar() {
     event.preventDefault();
     Auth.logout();
   };
-
-  // console.log(notes);
-  // if (!notes.length) {
-  //   return;
-  //   <p> Please add a note! </p>;
-  // }
 
   return (
     <div className="flex sm:p-4 flex-col md:justify-between bg-cadet p-2 border-right min-h-mostscreen md:max-h-max sm:max-h-fit" id="sidenav">
@@ -63,7 +54,7 @@ function Sidebar() {
 
         <div className="flex space-x-2 justify-start mt-3 overscroll-contain sm-hidden">
           <NoteList 
-            notes={notes.filter((note) => note.noteText.toLowerCase().includes(searchText))} />
+            notes={notes.filter((note) => note.tag.toLowerCase().includes(searchText))} />
         </div>
       </div>
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {
   ApolloClient,
@@ -15,9 +15,8 @@ import Footer from "./components/Footer";
 import CreateNote from "./pages/CreateNote";
 import SingleNote from "./pages/SingleNote";
 
-import NoteForm from "./components/NoteForm";
 import Sidebar from "./components/SideBar/index";
-import Auth from "./utils/auth";
+
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -40,8 +39,6 @@ const client = new ApolloClient({
 
 function App() {
 
-  const loggedIn = Auth.loggedIn();
-
   return (
     <ApolloProvider client={client}>
       <Router>
@@ -55,7 +52,6 @@ function App() {
             <Route path="/singlenote/:id" element={<SingleNote />} />
             <Route path="/sidebar" element={<Sidebar />} />
           </Routes>
-
           <Footer />
         </div>
       </Router>

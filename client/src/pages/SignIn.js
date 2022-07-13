@@ -38,7 +38,7 @@ function SignIn() {
   };
 
   return (
-    <div className="flex md:flex-row sm:flex-col w-full bg-cadet md:p-12 items-center">
+    <div className="flex md:flex-row sm:flex-col w-full bg-cadet min-h-mostscreen md:p-12 items-center">
       <div className="md:p-3 sm:p-4 flex flex-wrap justify-center sm:w-screen">
         <img
           src={require("../assets/images/logo.png")}
