@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import SideBar from "../components/SideBar";
-import { QUERY_ME, QUERY_NOTES } from "../utils/queries";
-import { REMOVE_NOTE } from "../utils/mutations";
-import { useQuery, useMutation } from "@apollo/client";
-import { CopyBlock, dracula } from "react-code-blocks";
+import React, { useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import SideBar from '../components/SideBar';
+import { QUERY_ME, QUERY_NOTES } from '../utils/queries';
+import { REMOVE_NOTE } from '../utils/mutations';
+import { useQuery, useMutation } from '@apollo/client';
+import { CopyBlock, dracula } from 'react-code-blocks';
 
-import Auth from "../utils/auth";
-import CategoryList from "../components/CategoryList";
-import NoteList from "../components/NoteList";
-import { IconContext } from "react-icons";
-import { VscSearch, VscTrash } from "react-icons/vsc";
+import Auth from '../utils/auth';
+import CategoryList from '../components/CategoryList';
+import NoteList from '../components/NoteList';
+import { IconContext } from 'react-icons';
+import { VscSearch, VscTrash } from 'react-icons/vsc';
 //import icons
 
 function Dash() {
@@ -19,15 +19,15 @@ function Dash() {
 
   const [removeNote, { error }] = useMutation(REMOVE_NOTE);
 
-  const deleteNote = async (event) => {
+  const deleteNote = async event => {
     event.preventDefault();
     // removeNote(event.target.value);
     console.log(event.target.className);
   };
 
-  const [searchText, setSearchText] = useState("");
+  const [searchText, setSearchText] = useState('');
 
-  const handleSearchNote = (event) => {
+  const handleSearchNote = event => {
     setSearchText(event.target.value);
   };
   //need to work on line 36  to add filter to map `.filter((note) => note.noteText.toLowerCase().includes(searchText))`
@@ -43,7 +43,7 @@ function Dash() {
         </h3>
         <div className="flex flex-row flex-wrap gap-4 md:m-5 sm:m-3 md:p-4 sm:p-3">
           {notes &&
-            notes.map((notes) => (
+            notes.map(notes => (
               <div id={notes._id} className="" key={notes._id}>
                 <div className="m-3 p-3 bg-antique rounded note-view max-w-md max-h-96">
                   <Link
@@ -52,7 +52,10 @@ function Dash() {
                     to={`/singlenote/${notes._id}`}
                   >
                     <h4 className="text-md font-normal mb-2">
-                      [{notes.tag}] {notes.noteTitle}
+                      <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded text-lime bg-liver last:mr-0 mr-1 shadow-lg">
+                        {notes.tag}
+                      </span>{' '}
+                      {notes.noteTitle}
                     </h4>
                   </Link>
                   <div className="max-h-64 overflow-y-scroll scrollbar-mini">
