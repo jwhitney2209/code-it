@@ -5,4 +5,5 @@
 
 body {
   font-family: 'Anonymous Pro', monospace;
+  min-height: 100vh;
 }
