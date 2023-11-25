@@ -1,10 +1,4 @@
-const { gql } = require("apollo-server-express");
-
-// User has _id, username, email, password, has many notes and has many categories
-// Note has _id, title, body, snippet, belongs to user, belongs to category
-// Category has _id, name, has many notes
-
-const typeDefs = gql`
+const typeDefs  = `#graphql 
   type User {
     _id: ID!
     username: String
@@ -27,28 +21,29 @@ const typeDefs = gql`
     noteText: String
     noteSnippet: String
     tag: String
+    categoryId: String
     createdAt: String
     userId: String
   }
 
-  type Auth {
-    token: ID!
-    user: User
+  type AuthPayload {
+    token: String!
+    user: User!
   }
 
   type Query {
     me: User
     users: [User]
-    user(username: String!): User
-    categories(username: String): [Category]
-    notes(userId: ID!): [Note]
-    category(_id: ID!): Category
-    note(_id: ID!): Note
+    user(userId: String!): User
+    categories: [Category]
+    notes: [Note]
+    category(categoryId: String!): Category
+    note(noteId: String!): Note
   }
 
   type Mutation {
-    login(email: String!, password: String!): Auth
-    addUser(username: String!, email: String!, password: String!): Auth
+    login(email: String!, password: String!): AuthPayload
+    addUser(username: String!, email: String!, password: String!): AuthPayload
     addCategory(categoryName: String!): Category
     addNote(
       tag: String!
@@ -60,5 +55,5 @@ const typeDefs = gql`
   }
 `;
 
-module.exports = typeDefs;
 
+module.exports = typeDefs;

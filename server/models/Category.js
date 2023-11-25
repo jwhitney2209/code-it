@@ -1,19 +1,19 @@
 const { Schema, model } = require('mongoose');
-const Note = require('./Note');
 
 const categorySchema = new Schema(
   {
-    categoryName: {
+    name: {
       type: String,
       required: true,
       minlength: 1,
       maxlength: 20
     },
-    username: {
-      type: String,
-      required: true
-    },
-    notes: [Note.schema]
+    notes: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Note'
+      }
+    ]
   },
   {
     toJSON: {
