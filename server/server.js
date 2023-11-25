@@ -5,7 +5,9 @@ const cors = require("cors");
 const path = require('path');
 require("dotenv").config();
 
-const { typeDefs, resolvers } = require('./schemas');
+const typeDefs = require('./graphql/typeDefs');
+const resolvers = require('./graphql/resolvers');
+
 const { authMiddleware } = require('./utils/auth');
 const db = require('./config/connection');
 

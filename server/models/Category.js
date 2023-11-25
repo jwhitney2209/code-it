@@ -1,31 +1,35 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model } = require("mongoose");
 
 const categorySchema = new Schema(
   {
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
     name: {
       type: String,
       required: true,
       minlength: 1,
-      maxlength: 20
+      maxlength: 20,
     },
     notes: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Note'
-      }
-    ]
+        ref: "Note",
+      },
+    ],
   },
   {
     toJSON: {
-      getters: true
-    }
+      getters: true,
+    },
   }
-)
+);
 
-categorySchema.virtual('noteCount').get(function() {
+categorySchema.virtual("noteCount").get(function () {
   return this.notes.length;
 });
 
-const Category = model('Category', categorySchema);
+const Category = model("Category", categorySchema);
 
 module.exports = Category;

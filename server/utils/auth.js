@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const { GraphQLError } = require("graphql")
 require('dotenv').config();
 
-const secret = "supersecretshhhhh";
+const secret = process.env.JWT_SECRET;
 const expiration = '1d';
 
 module.exports = {
@@ -33,7 +33,6 @@ module.exports = {
   },
   signToken: function ({ username, email, _id }) {
     const payload = { username, email, _id };
-    console.log(`SECRET: ${secret}`)
     return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
   },
 };

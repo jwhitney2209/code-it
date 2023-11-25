@@ -10,15 +10,17 @@ module.exports = {
   Query: {
     async me(_, args, context) {
       const user = context.user;
-
+      console.log(user)
       if (!user) {
         throw new Error('You must be logged in to perform this action!');
       }
 
       try {
-        const userData = await User.find({ _id: user._id })
+        const userData = await User.findById(user._id)
           .populate('notes')
           .populate('categories');
+
+          console.log(userData)
         return userData;
       } catch (err) {
         throw new Error('Something went wrong with this request!');
@@ -28,10 +30,10 @@ module.exports = {
   Mutation: {
     async addUser(_, { username, email, password, confirmPassword }) {
       // validate user input 
-      const { valid, errors } = validateRegisterInput(username, email, password, confirmPassword);
-      if (!valid) {
-        throw new GraphQLError(errors);
-      }
+      // const { valid, errors } = validateRegisterInput(username, email, password, confirmPassword);
+      // if (!valid) {
+      //   throw new GraphQLError(errors);
+      // }
 
       // check if user already exists
       const checkUser = await User.findOne({ email });
@@ -46,7 +48,32 @@ module.exports = {
         password
       });
 
-      const savedUser = await user.save();
+      await user.save();
+
+      const token = signToken(user);
+
+      return {
+        token: token, user: user
+      }
+    },
+    async login(_, { email, password }) {
+      const user = await User.findOne({ email });
+
+      if (!user) {
+        throw new GraphQLError('Invalid credentials!');
+      }
+
+      const correctPw = await bcrypt.compare(password, user.password);
+
+      if (!correctPw) {
+        throw new GraphQLError('Invalid credentials!');
+      }
+
+      const token = signToken(user);
+
+      return {
+        token: token, user: user
+      }
     }
   }
 }

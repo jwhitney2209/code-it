@@ -3,20 +3,19 @@ type User {
   id: ID!
   username: String
   email: String
-  password: String
   categories: [Category]
   notes: [Note]
 }
 
 type Category {
   id: ID!
-  name: String!
+  name: String
   notes: [Note]
 }
 
 type Note {
   id: ID!
-  title: String!
+  title: String
   description: String
   snippet: String
   createdAt: String
@@ -36,8 +35,8 @@ type Query {
 type Mutation {
   login(email: String!, password: String!): AuthPayload
   addUser(username: String!, email: String!, password: String!, confirmPassword: String!): AuthPayload
-  addCategory(name: String!): Category
-  addNote(title: String!, description: String, snippet: String, categoryId: String): Note
-  removeNote(noteId: String!): Note
+  # addCategory(name: String!): Category
+  # addNote(title: String!, description: String, snippet: String, categoryId: String): Note
+  # removeNote(noteId: String!): Note
 }
 `
