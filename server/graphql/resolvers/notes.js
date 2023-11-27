@@ -25,8 +25,11 @@ module.exports = {
       }
 
       const category = await Category.findById(categoryId);
+      if (!category) {
+        throw new Error('Category not found!');
+      }
       try {
-        const note = new Note({
+        let note = new Note({
           title,
           description,
           snippet,
@@ -36,13 +39,15 @@ module.exports = {
 
         await note.save();
 
-        console.log(note)
+        note = await note.populate('category');
+
         const userDoc = await User.findById(user._id);
         userDoc.notes.push(note._id);
         await userDoc.save();
 
         return note;
       } catch (err) {
+        console.log(err);
         throw new Error('Something went wrong with this request!');
       }
     },
