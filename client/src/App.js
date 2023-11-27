@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import {
   ApolloClient,
   InMemoryCache,
@@ -16,7 +16,6 @@ import CreateNote from "./pages/CreateNote";
 import SingleNote from "./pages/SingleNote";
 
 import Sidebar from "./components/SideBar/index";
-
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -38,23 +37,18 @@ const client = new ApolloClient({
 });
 
 function App() {
-
   return (
     <ApolloProvider client={client}>
-      <Router>
-        <div>
-          <Header />
-          <Routes>
-            <Route path="/" element={<SignIn />} />
-            <Route path="/signup" element={<CreateAccount />} />
-            <Route path="/dashboard" element={<Dash />} />
-            <Route path="/createnote" element={<CreateNote />} />
-            <Route path="/singlenote/:id" element={<SingleNote />} />
-            <Route path="/sidebar" element={<Sidebar />} />
-          </Routes>
-          <Footer />
-        </div>
-      </Router>
+      <Header />
+      <Routes>
+        <Route path="/" element={<SignIn />} />
+        <Route path="/signup" element={<CreateAccount />} />
+        <Route path="/dashboard" element={<Dash />} />
+        <Route path="/createnote" element={<CreateNote />} />
+        <Route path="/singlenote/:id" element={<SingleNote />} />
+        <Route path="/sidebar" element={<Sidebar />} />
+      </Routes>
+      <Footer />
     </ApolloProvider>
   );
 }
