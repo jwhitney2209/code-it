@@ -10,17 +10,18 @@ module.exports = {
   Query: {
     async me(_, args, context) {
       const user = context.user;
-      console.log(user)
       if (!user) {
         throw new Error('You must be logged in to perform this action!');
       }
 
       try {
         const userData = await User.findById(user._id)
-          .populate('notes')
+          .populate({
+            path: 'notes',
+            populate: { path: 'category' }
+          })
           .populate('categories');
 
-          console.log(userData)
         return userData;
       } catch (err) {
         throw new Error('Something went wrong with this request!');
@@ -29,13 +30,6 @@ module.exports = {
   },
   Mutation: {
     async addUser(_, { username, email, password, confirmPassword }) {
-      // validate user input 
-      // const { valid, errors } = validateRegisterInput(username, email, password, confirmPassword);
-      // if (!valid) {
-      //   throw new GraphQLError(errors);
-      // }
-
-      // check if user already exists
       const checkUser = await User.findOne({ email });
 
       if (checkUser) {

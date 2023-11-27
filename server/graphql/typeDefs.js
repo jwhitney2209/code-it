@@ -9,8 +9,8 @@ type User {
 
 type Category {
   id: ID!
-  name: String
-  notes: [Note]
+  name: String!
+  userId: String
 }
 
 type Note {
@@ -20,6 +20,7 @@ type Note {
   snippet: String
   createdAt: String
   category: Category
+  userId: User
 }
 
 type AuthPayload {
@@ -30,13 +31,17 @@ type AuthPayload {
 type Query {
   me: User
   users: [User]
+  categories: [Category]
+  notes: [Note]
 }
 
 type Mutation {
   login(email: String!, password: String!): AuthPayload
   addUser(username: String!, email: String!, password: String!, confirmPassword: String!): AuthPayload
-  # addCategory(name: String!): Category
-  # addNote(title: String!, description: String, snippet: String, categoryId: String): Note
-  # removeNote(noteId: String!): Note
+  addCategory(name: String!): Category
+  addNote(title: String!, description: String, snippet: String, categoryId: String): Note
+  removeCategory(categoryId: String!): String
+  updateCategory(categoryId: String!, name: String!): Category
+  removeNote(noteId: String!): String
 }
 `

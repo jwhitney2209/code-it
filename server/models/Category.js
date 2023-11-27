@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 
 const categorySchema = new Schema(
   {
-    user: {
+    userId: {
       type: Schema.Types.ObjectId,
       ref: "User",
     },
@@ -12,12 +12,6 @@ const categorySchema = new Schema(
       minlength: 1,
       maxlength: 20,
     },
-    notes: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Note",
-      },
-    ],
   },
   {
     toJSON: {
@@ -25,10 +19,6 @@ const categorySchema = new Schema(
     },
   }
 );
-
-categorySchema.virtual("noteCount").get(function () {
-  return this.notes.length;
-});
 
 const Category = model("Category", categorySchema);
 
