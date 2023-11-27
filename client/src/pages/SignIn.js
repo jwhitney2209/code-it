@@ -5,6 +5,10 @@ import { LOGIN_USER } from "../utils/mutations";
 
 import Auth from "../utils/auth";
 
+const intialState = {
+  email: "",
+  password: "",
+}
 function SignIn() {
   const [formState, setFormState] = useState({ email: "", password: "" });
   const [login, { error }] = useMutation(LOGIN_USER);
@@ -31,10 +35,7 @@ function SignIn() {
     }
 
     // clear form values
-    setFormState({
-      email: "",
-      password: "",
-    });
+    setFormState(intialState);
   };
 
   return (

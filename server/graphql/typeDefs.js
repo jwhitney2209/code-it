@@ -33,6 +33,7 @@ type Query {
   users: [User]
   categories: [Category]
   notes: [Note]
+  note(noteId: String): Note
 }
 
 type Mutation {
