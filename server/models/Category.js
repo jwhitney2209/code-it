@@ -1,31 +1,25 @@
-const { Schema, model } = require('mongoose');
-const Note = require('./Note');
+const { Schema, model } = require("mongoose");
 
 const categorySchema = new Schema(
   {
-    categoryName: {
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+    name: {
       type: String,
       required: true,
       minlength: 1,
-      maxlength: 20
+      maxlength: 20,
     },
-    username: {
-      type: String,
-      required: true
-    },
-    notes: [Note.schema]
   },
   {
     toJSON: {
-      getters: true
-    }
+      getters: true,
+    },
   }
-)
+);
 
-categorySchema.virtual('noteCount').get(function() {
-  return this.notes.length;
-});
-
-const Category = model('Category', categorySchema);
+const Category = model("Category", categorySchema);
 
 module.exports = Category;

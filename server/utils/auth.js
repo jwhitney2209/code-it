@@ -1,8 +1,9 @@
 const jwt = require('jsonwebtoken');
+const { GraphQLError } = require("graphql")
 require('dotenv').config();
 
-const secret = process.env.SECRET;
-const expiration = '3h';
+const secret = process.env.JWT_SECRET;
+const expiration = '1d';
 
 module.exports = {
   authMiddleware: function ({ req }) {
@@ -11,7 +12,8 @@ module.exports = {
 
     // separate "Bearer" from "<tokenvalue>"
     if (req.headers.authorization) {
-      token = token.split(' ').pop().trim();
+      token = token.split('Bearer ')[1];
+
     }
     // if no token, return request object as is
     if (!token) {
@@ -31,7 +33,6 @@ module.exports = {
   },
   signToken: function ({ username, email, _id }) {
     const payload = { username, email, _id };
-
     return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
   },
 };
