@@ -15,6 +15,20 @@ module.exports = {
       } catch (err) {
         throw new Error('Something went wrong with this request!');
       }
+    },
+    async note(_, { noteId }, context) {
+      const user = context.user;
+      if (!user) {
+        throw new Error('You must be logged in to perform this action!');
+      }
+
+      try {
+        const note = await Note.findById(noteId).populate('category').populate('userId');
+
+        return note;
+      } catch (err) {
+        throw new Error('Something went wrong with this request!');
+      }
     }
   },
   Mutation: {

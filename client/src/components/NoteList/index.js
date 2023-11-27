@@ -17,17 +17,17 @@ const NoteList = props => {
     <div>
       {noteData &&
         noteData.map(notes => (
-          <div key={notes._id}>
+          <div key={notes.id}>
             <Link
               key={notes._id}
               className="hover:text-lime font-thin text-liver flex items-center transition-colors duration-200 justify-start"
-              to={`/singlenote/${notes._id}`}
+              to={`/singlenote/${notes.id}`}
             >
               <ul className="text-md font-normal">
                 <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded text-lime bg-liver last:mr-0 mr-1 shadow-lg">
-                  {notes.tag}
+                  {notes.category.name}
                 </span>{' '}
-                {notes.noteTitle}
+                {notes.title}
               </ul>
             </Link>
           </div>

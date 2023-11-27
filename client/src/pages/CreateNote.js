@@ -6,41 +6,35 @@ import { QUERY_ME } from "../utils/queries";
 import SideBar from "../components/SideBar";
 import Auth from "../utils/auth";
 
+const initialState = {
+  title: "",
+  description: "",
+  snippet: "",
+  categoryId: "",
+};
+
 const CreateNote = () => {
   const navigate = useNavigate();
-  const [noteTitle, setnoteTitle] = useState("");
-  const [noteText, setnoteText] = useState("");
-  const [noteSnippet, setnoteSnippet] = useState("");
-  const [tag, setTag] = useState("");
+  const [formState, setFormState] = useState({
+    title: "",
+    description: "",
+    snippet: "",
+    categoryId: "",
+  });
   const [addNote] = useMutation(CREATE_NOTE, {
-    update(cache, { data: { addNote } }) {
-      try {
-        const { me } = cache.readQuery({ query: QUERY_ME });
-        cache.writeQuery({
-          query: QUERY_ME,
-          data: { me: { ...me, notes: [...me.notes, addNote] } },
-        });
-      } catch (e) {
-        console.log("First note insertion by user");
-      }
-    },
+    refetchQueries: [QUERY_ME],
   });
 
-  const handleTitleChange = (event) => {
-    setnoteTitle(event.target.value);
-  };
-  const handleTextChange = (event) => {
-    setnoteText(event.target.value);
-  };
-  const handleSnippetChange = (event) => {
-    setnoteSnippet(event.target.value);
-  };
-  const handleTagChange = (event) => {
-    setTag(event.target.value);
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
   };
 
   if (!Auth.loggedIn()) {
-    navigate('/')
+    navigate("/");
   }
 
   const handleFormSubmit = async (event) => {
@@ -48,20 +42,16 @@ const CreateNote = () => {
     try {
       // add category to database
       await addNote({
-        variables: { noteTitle, noteText, noteSnippet, tag },
+        variables: { ...formState },
       });
 
-      setnoteTitle("");
-      setnoteText("");
-      setnoteSnippet("");
-      setTag("");
+      // clear form values
+      setFormState(initialState);
       navigate("/dashboard");
     } catch (e) {
       console.error(e);
     }
   };
-
-
 
   return (
     <main className="flex md:flex-row  md:min-h-full md:h-full sm:w-full sm:flex-col content-start items-stretch">
@@ -84,9 +74,9 @@ const CreateNote = () => {
 
             <div className="flex w-full pb-2 ">
               <input
-                name="noteTitle"
-                onChange={handleTitleChange}
-                value={noteTitle.noteTitle}
+                name="title"
+                onChange={handleChange}
+                value={formState.title}
                 type="text"
                 placeholder="Add Title Here"
                 className="p-2 outline-none bg-antique new-note md:text-3xl sm:text-lg"
@@ -98,10 +88,10 @@ const CreateNote = () => {
                 Code Notes:{" "}
               </label>
               <textarea
-                name="noteText"
+                name="description"
                 rows={5}
-                onChange={handleTextChange}
-                value={noteText.noteText}
+                onChange={handleChange}
+                value={formState.description}
                 className="block border p-2 rounded mx-w-full focus:outline-cadet"
                 placeholder="Describe your code..."
               ></textarea>
@@ -112,16 +102,16 @@ const CreateNote = () => {
                 Code:{" "}
               </label>
               <textarea
-                name="noteSnippet"
+                name="snippet"
                 rows={10}
-                onChange={handleSnippetChange}
-                value={noteSnippet.noteSnippet}
+                onChange={handleChange}
+                value={formState.snippet}
                 className="block border p-2 rounded bg-code text-antique focus:outline-cadet"
                 placeholder="Add Your Code Here"
               ></textarea>
             </div>
-
-            <div className="flex flex-col py-2">
+            {/* Change to a dropdown of categories */}
+            {/* <div className="flex flex-col py-2">
               <label htmlFor="tag" className="text-lg">
                 Add a tag:{" "}
               </label>
@@ -132,7 +122,7 @@ const CreateNote = () => {
                 className="block border p-2 rounded focus:outline-cadet"
                 placeholder="Add a tag"
               ></textarea>
-            </div>
+            </div> */}
 
             <button
               type="submit"

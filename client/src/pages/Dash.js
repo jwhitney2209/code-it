@@ -29,23 +29,22 @@ function Dash() {
         <div className="flex flex-row flex-wrap gap-4 md:m-5 sm:m-3 md:p-4 sm:p-3">
           {notes &&
             notes.map(notes => (
-              <div id={notes._id} className="" key={notes._id}>
+              <div id={notes.id} className="" key={notes.id}>
                 <div className="m-3 p-3 bg-antique rounded note-view max-w-md max-h-96">
                   <Link
-                    key={notes._id}
                     className="hover:text-cadet font-thin text-liver flex items-center transition-colors duration-200 justify-start"
-                    to={`/singlenote/${notes._id}`}
+                    to={`/singlenote/${notes.id}`}
                   >
                     <h4 className="text-md font-normal mb-2">
                       <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded text-lime bg-liver last:mr-0 mr-1 shadow-lg">
-                        {notes.tag}
+                        {notes.category.name}
                       </span>{' '}
-                      {notes.noteTitle}
+                      {notes.title}
                     </h4>
                   </Link>
                   <div className="max-h-64 overflow-y-scroll scrollbar-mini">
                     <CopyBlock
-                      text={notes.noteSnippet}
+                      text={notes.snippet}
                       language="markup"
                       theme={dracula}
                     />

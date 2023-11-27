@@ -29,28 +29,32 @@ query category($id: ID!) {
 `;
 
 export const QUERY_NOTES = gql`
-query notes($username: String) {
-  notes(username: $username) {
-    _id
-    noteTitle
-    noteText
-    noteSnippet
-    categoryId
+query notes {
+  notes {
+    id
+    title
+    snippet
     createdAt
-    username
+    category {
+      name
+    }
+    userId {
+      username
+    }
   }
 }`;
 
 export const QUERY_NOTE = gql`
-query note($id: ID!) {
-  note(_id: $id) {
-    _id
-    noteTitle
-    noteText
-    noteSnippet
-    tag
+query note($noteId: String) {
+  note(noteId: $noteId) {
+    id
+    title
+    description
+    snippet
     createdAt
-    userId
+    category {
+      name
+    }
   }
 }`;
 
@@ -58,16 +62,21 @@ query note($id: ID!) {
 export const QUERY_ME = gql`
 query me {
   me {
-    _id
-    username
+    id
     email
+    username
+    categories {
+      id
+      name
+    }
     notes {
-      _id
-      noteTitle
-      noteText
-      noteSnippet
-      tag
+      id
+      title
+      snippet
       createdAt
+      category {
+        name
+      }
     }
   }
 }
