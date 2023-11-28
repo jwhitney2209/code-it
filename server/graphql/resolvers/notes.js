@@ -38,22 +38,22 @@ module.exports = {
         throw new Error('You must be logged in to perform this action!');
       }
 
-      const category = await Category.findById(categoryId);
-      if (!category) {
-        throw new Error('Category not found!');
-      }
+      // const category = await Category.findById(categoryId);
+      // if (!category) {
+      //   throw new Error('Category not found!');
+      // }
       try {
         let note = new Note({
           title,
           description,
           snippet,
-          category: category._id,
+          // category: category._id,
           userId: user._id
         });
 
         await note.save();
 
-        note = await note.populate('category');
+        // note = await note.populate('category');
 
         const userDoc = await User.findById(user._id);
         userDoc.notes.push(note._id);
