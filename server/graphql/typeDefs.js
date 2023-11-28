@@ -38,7 +38,7 @@ type Query {
 
 type Mutation {
   login(email: String!, password: String!): AuthPayload
-  addUser(username: String!, email: String!, password: String!, confirmPassword: String!): AuthPayload
+  addUser(username: String!, email: String!, password: String!): AuthPayload
   addCategory(name: String!): Category
   addNote(title: String!, description: String, snippet: String, categoryId: String): Note
   removeCategory(categoryId: String!): String

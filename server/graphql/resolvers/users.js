@@ -29,7 +29,7 @@ module.exports = {
     }
   },
   Mutation: {
-    async addUser(_, { username, email, password, confirmPassword }) {
+    async addUser(_, { username, email, password }) {
       const checkUser = await User.findOne({ email });
 
       if (checkUser) {
