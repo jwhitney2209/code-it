@@ -36,9 +36,9 @@ function Dash() {
                     to={`/singlenote/${notes.id}`}
                   >
                     <h4 className="text-md font-normal mb-2">
-                      <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded text-lime bg-liver last:mr-0 mr-1 shadow-lg">
+                      {/* <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded text-lime bg-liver last:mr-0 mr-1 shadow-lg">
                         {notes.category.name}
-                      </span>{' '}
+                      </span>{' '} */}
                       {notes.title}
                     </h4>
                   </Link>

@@ -24,9 +24,9 @@ const NoteList = props => {
               to={`/singlenote/${notes.id}`}
             >
               <ul className="text-md font-normal">
-                <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded text-lime bg-liver last:mr-0 mr-1 shadow-lg">
+                {/* <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded text-lime bg-liver last:mr-0 mr-1 shadow-lg">
                   {notes.category.name}
-                </span>{' '}
+                </span>{' '} */}
                 {notes.title}
               </ul>
             </Link>
