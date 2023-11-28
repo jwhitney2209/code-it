@@ -10,7 +10,6 @@ const initialState = {
   title: "",
   description: "",
   snippet: "",
-  categoryId: "",
 };
 
 const CreateNote = () => {
@@ -19,7 +18,6 @@ const CreateNote = () => {
     title: "",
     description: "",
     snippet: "",
-    categoryId: "",
   });
   const [addNote] = useMutation(CREATE_NOTE, {
     refetchQueries: [QUERY_ME],
