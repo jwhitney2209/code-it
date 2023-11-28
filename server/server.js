@@ -3,7 +3,6 @@ const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require("@apollo/server/express4")
 const cors = require("cors");
 const path = require('path');
-require("dotenv").config();
 
 const typeDefs = require('./graphql/typeDefs');
 const resolvers = require('./graphql/resolvers');
