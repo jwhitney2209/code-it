@@ -5,12 +5,7 @@ import { useQuery } from "@apollo/client";
 import { Link } from "react-router-dom";
 import { QUERY_ME } from "../../utils/queries";
 //import icons
-import {
-  VscSearch,
-} from "react-icons/vsc";
-
-
-
+import { VscSearch } from "react-icons/vsc";
 
 function Sidebar() {
   const [searchText, setSearchText] = useState("");
@@ -19,7 +14,7 @@ function Sidebar() {
     setSearchText(event.target.value);
   };
 
-// eslint-disable-next-line
+  // eslint-disable-next-line
   const { loading, data } = useQuery(QUERY_ME);
 
   const notes = data?.me.notes || [];
@@ -29,7 +24,10 @@ function Sidebar() {
   };
 
   return (
-    <div className="flex sm:p-4 flex-col md:justify-between bg-cadet p-2 border-right min-h-mostscreen md:max-h-max sm:max-h-fit" id="sidenav">
+    <div
+      className="flex sm:p-4 flex-col md:justify-between bg-cadet p-2 border-right min-h-mostscreen md:max-h-max sm:max-h-fit"
+      id="sidenav"
+    >
       <div className="">
         <div className="flex flex-row p-1 md:mx-2 md:mt-3 sm:mx-1 sm:mt-4 align-items: center justify-items-start bg-lime rounded-2xl border">
           <VscSearch size={20} className="fill-liver pl-1" />
@@ -53,9 +51,9 @@ function Sidebar() {
         </div>
 
         <div className="flex space-x-2 justify-start mt-3 overscroll-contain sm-hidden">
-          {/* <NoteList 
-            notes={notes.filter((note) => note.category.name.toLowerCase().includes(searchText))} /> */}
-          <NoteList notes={notes} />
+          {/* <NoteList notes={notes.filter((note) => note.category.name.toLowerCase().includes(searchText))} /> */}
+          <NoteList notes={notes} />{" "}
+        </div>
       </div>
 
       <div className="sm:mx-3 sm-hidden">
