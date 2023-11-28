@@ -53,9 +53,9 @@ function Sidebar() {
         </div>
 
         <div className="flex space-x-2 justify-start mt-3 overscroll-contain sm-hidden">
-          <NoteList 
-            notes={notes.filter((note) => note.category.name.toLowerCase().includes(searchText))} />
-        </div>
+          {/* <NoteList 
+            notes={notes.filter((note) => note.category.name.toLowerCase().includes(searchText))} /> */}
+          <NoteList notes={notes} />
       </div>
 
       <div className="sm:mx-3 sm-hidden">
