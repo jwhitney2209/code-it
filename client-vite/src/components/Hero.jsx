@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ChevronRightIcon } from "@heroicons/react/20/solid";
 import SignInCard from "./SignInCard";
 import SignUpCard from "./SignUpCard";
+import IconSvg from "./IconSvg";
 const Hero = () => {
   // switch between sign in and sign up
   const [isSignUp, setIsSignUp] = useState(false);
@@ -53,11 +54,7 @@ const Hero = () => {
       </div>
       <div className="mx-auto max-w-7xl px-6 pb-24 pt-10 sm:pb-32 lg:flex lg:px-8 lg:py-40 justify-between gap-8">
         <div className="mx-auto flex-shrink-0 lg:mx-0 lg:w-2/3 lg:pt-8">
-          <img
-            className="h-11"
-            src="https://tailwindui.com/img/logos/mark.svg?color=emerald&shade=500"
-            alt="Your Company"
-          />
+          <IconSvg options="fill-emerald-500 h-10" />
           <div className="mt-24 sm:mt-32 lg:mt-16">
             <a href="#" className="inline-flex space-x-6">
               <span className="rounded-full bg-emerald-500/10 px-3 py-1 text-sm font-semibold leading-6 text-emerald-400 ring-1 ring-inset ring-emerald-500/20">
@@ -76,7 +73,7 @@ const Hero = () => {
             Code.log
           </h1>
           <p className="mt-6 text-lg leading-8 text-gray-300">
-            Stop wasting time going through old repos to find code you want to reuse. With Code.log you can save your code snippets and grab them easily whenever you want.
+            Stop wasting time going through old repos to find code you want to reuse. With Code.log you can save your code snippets and grab them easily from any device!
           </p>
           <div className="mt-10 flex items-center gap-x-6">
             <a
